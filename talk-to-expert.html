@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Talk to Expert </title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+
+  <link rel="stylesheet" href="assets/global-fixes.css">
+  <link rel="stylesheet" href="assets/theme-enhancements.css">
+  <link rel="stylesheet" href="assets/theme-header.css">
+  <link rel="stylesheet" href="assets/theme-logo.css">
+  <link rel="stylesheet" href="assets/modern-styles.css">
+  <link rel="stylesheet" href="assets/talk-to-expert.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">
+        <span class="brand-text">𝓲𝓴𝓸𝓻𝓪</span>
+      </a>
+      <nav id="mainNav" class="nav" aria-label="Main navigation">
+        <ul class="nav-list">
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-btn" aria-pressed="false" title="Toggle theme">
+          <span class="icon" id="themeToggleIcon">🌙</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="expert-main">
+    <section class="hero-expert">
+      <h1>Ignite Your Career Journey.</h1>
+      <p>Explore pathways, gain insights, and connect with mentors to shape your future.</p>
+      <div class="expert-search-container">
+        <input type="text" id="expertSearchInput" placeholder="Search for career-related details in our website...">
+        <button id="expertSearchButton" class="search-button"><i class="fas fa-search"></i> Search</button>
+      </div>
+    </section>
+
+    <section class="expert-contact-section">
+      <h2>Our Panel of Experts</h2>
+      <div class="expert-cards-grid">
+        <div class="expert-card">
+          <h3>Saanvi</h3>
+          <p>Ethical Hacker</p>
+        </div>
+        <div class="expert-card">
+          <h3>Tom Scott</h3>
+          <p>Journalist</p>
+        </div>
+        <div class="expert-card">
+          <h3>Aarav</h3>
+          <p>Painter</p>
+        </div>
+        <div class="expert-card">
+          <h3>Amit</h3>
+          <p>Entrepreneur</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-buttons">
+        <div class="footer-about-link">
+          <a href="#" data-modal-target="#aboutModal">About</a>
+        </div>
+        <div class="footer-our-team-link">
+          <a href="#" data-modal-target="#ourTeamModal">Our Team</a>
+        </div>
+      </div>
+      <p class="footer-text"> © 2025 <img src="images/logo.png" alt="Future Skills Logo" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
+    </div>
+  </footer>
+
+  <div id="aboutModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <section class="detail-section">
+        <div class="section-container">
+          <h1>About <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">𝓲𝓴𝓸𝓻𝓪</h1>
+          <h1>💡 Why Vikora?</h1>
+          <p class="subtitle">Imagine a student who wants to become a photographer — but no one around them knows where to start, what skills are needed, or what path to follow.</p>
+          <p>The student turns to the internet and finds an overwhelming sea of information — thousands of opinions, guides, and personal experiences.</p>
+          <p>This is where Vikora steps in.</p>
+          <p>We bridge the gap by offering a personalized roadmap that helps students confidently navigate their journey — from learning to professional success.</p>
+          <h1>🌟 Key Features of Vikora</h1>
+          <h2>🎯 Career Roadmaps</h2>
+          <p>Get the right and most effective roadmap tailored to your chosen career — curated by professionals and verified mentors.</p>
+          <h2>🧠 Virtual Career Experience (VCE)</h2>
+          <p>Experience your future career before you pursue it.</p>
+          <p>VCE allows students to explore real-world tasks and responsibilities to understand what a career truly feels like — helping them make informed, confident decisions.</p>
+          <h2>💬 Talk to Experts</h2>
+          <p>Clear your doubts directly with experienced industry experts.</p>
+          <p>Through one-on-one sessions, students gain valuable insights, practical advice, and mentorship from professionals already thriving in their chosen fields.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="ourTeamModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <section class="detail-section">
+        <div class="section-container">
+          <h1><img src="images/logo 2.png" alt="Our Team Logo" class="our-team-modal-logo"> Our Team - <span class="gradient-text">Scan SmartRoots</span></h1>
+          <p><strong>Developer:</strong> Aarav Thakur</p>
+          <p><strong>Developer:</strong> Amit Kushwaha</p>
+          <p><strong>Other Team-Mates:-</strong></p>
+          <ol>
+            <li>Abujar</li>
+            <li>Akarshit Kumar</li>
+            <li>Kuldeep Chauhan</li>
+          </ol>
+          <p><strong>School Name:</strong> Shaheed Capt. Anuj Nayeer (SCAN) SBV NO.2 JANAKPURI B-BLOCK, NEW DELHI-110058</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="scripts/theme-manager.js"></script>
+  <script src="scripts/theme-toggle-custom.js"></script>
+  <script src="scripts/modal-manager.js"></script>
+  <script src="scripts/expert-logic.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+.tiles-grid.three-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.roadmap-carousel {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.career-item {
+  flex: 0 0 auto;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  scroll-snap-align: start;
+  font-size: 0.9em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+/* Optional: Add some scrollbar styling for better visibility */
+.roadmap-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.roadmap-carousel::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 10px;
+}
+
+.roadmap-carousel::-webkit-scrollbar-track {
+  background-color: var(--color-bg-secondary);
+}

@@ -1,0 +1,144 @@
+.expert-main {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-expert {
+  text-align: center;
+  margin-bottom: 60px;
+  background-color: var(--color-background-elevated);
+  padding: 40px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-elevation-2);
+}
+
+.hero-expert h1 {
+  font-size: 3em;
+  color: var(--color-primary);
+  margin-bottom: 15px;
+}
+
+.hero-expert p {
+  font-size: 1.2em;
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.expert-search-container {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#expertSearchInput {
+  padding: 12px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1em;
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--color-background-elevated);
+  color: var(--color-text-primary);
+}
+
+#expertSearchInput::placeholder {
+  color: var(--color-text-secondary);
+}
+
+#expertSearchButton {
+  padding: 12px 25px;
+  background-color: var(--color-accent);
+  color: var(--color-button-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#expertSearchButton:hover {
+  background-color: var(--color-accent-dark);
+}
+
+.expert-contact-section {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.expert-contact-section h2 {
+  font-size: 2.5em;
+  color: var(--color-heading);
+  margin-bottom: 30px;
+}
+
+.expert-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.expert-card {
+  background-color: var(--color-background-elevated);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-elevation-1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+}
+
+.expert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-elevation-3);
+}
+
+.expert-card h3 {
+  font-size: 1.8em;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+}
+
+.expert-card p {
+  font-size: 1em;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-expert h1 {
+    font-size: 2.5em;
+  }
+
+  .hero-expert p {
+    font-size: 1em;
+  }
+
+  .expert-search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #expertSearchInput {
+    max-width: 100%;
+  }
+
+  #expertSearchButton {
+    width: 100%;
+  }
+
+  .expert-contact-section h2 {
+    font-size: 2em;
+  }
+
+  .expert-card h3 {
+    font-size: 1.5em;
+  }
+}

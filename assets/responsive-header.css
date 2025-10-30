@@ -1,0 +1,47 @@
+@media (max-width: 768px) {
+	header, .header, .site-header {
+		min-height: 76px !important;
+		height: 76px !important;
+		padding: 0 1.2rem !important;
+		font-size: 1.22rem !important;
+		box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+		background: inherit;
+		display: flex;
+		align-items: center;
+	}
+	.header-logo img, .site-header img, .logo img {
+		height: 48px !important;
+		max-height: 48px !important;
+	}
+	.header-nav, .site-header nav, nav {
+		font-size: 1.12rem !important;
+		gap: 1.3rem !important;
+	}
+	.header-title, .site-title {
+		font-size: 1.38rem !important;
+		font-weight: 800 !important;
+		letter-spacing: 0.02em;
+	}
+}
+@media (max-width: 768px) {
+	header, .header, .site-header {
+		min-height: 72px !important;
+		height: 72px !important;
+		padding: 0 1.2rem !important;
+		font-size: 1.18rem !important;
+		box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+	}
+	.header-logo img, .site-header img, .logo img {
+		height: 44px !important;
+		max-height: 44px !important;
+	}
+	.header-nav, .site-header nav, nav {
+		font-size: 1.08rem !important;
+		gap: 1.2rem !important;
+	}
+	.header-title, .site-title {
+		font-size: 1.32rem !important;
+		font-weight: 700 !important;
+		letter-spacing: 0.02em;
+	}
+}

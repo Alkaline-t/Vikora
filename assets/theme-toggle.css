@@ -1,0 +1,240 @@
+/* Theme dropdown styles */
+.theme-toggle-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#theme-toggle {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    margin-right: 1.5rem;
+}
+
+#theme-toggle:hover, #theme-toggle[aria-expanded="true"] {
+    background: var(--hover-bg);
+    color: var(--accent-color);
+}
+
+.theme-toggle-menu {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    min-width: 140px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    padding: 0.3rem 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    animation: fadeIn 0.18s cubic-bezier(.4,0,.2,1);
+}
+
+.theme-toggle-menu[hidden] {
+    display: none !important;
+}
+
+.theme-toggle-menuitem {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem 0.6rem 0.8rem;
+    border-radius: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    transition: background 0.18s, color 0.18s;
+    outline: none;
+    text-align: left;
+}
+
+.theme-toggle-menuitem.active {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.theme-toggle-menuitem:focus {
+    /* show focus ring / neutral background but not the accent color */
+    background: var(--hover-bg);
+    color: var(--text-primary);
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.08);
+}
+
+.theme-toggle-menuitem:hover {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+}
+
+/* Stronger specificity: ensure only the active menu item shows the accent color */
+.theme-toggle-menu .theme-toggle-menuitem {
+    background: none;
+    color: var(--text-primary);
+}
+
+.theme-toggle-menu .theme-toggle-menuitem.active {
+    background: var(--accent-color) !important;
+    color: #fff !important;
+}
+
+/* Non-active items should use neutral hover/focus styles */
+.theme-toggle-menu .theme-toggle-menuitem:not(.active):hover,
+.theme-toggle-menu .theme-toggle-menuitem:not(.active):focus {
+    background: var(--hover-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Make active icon white for contrast */
+.theme-toggle-menu .theme-toggle-menuitem.active .theme-icon {
+    color: #fff !important;
+}
+
+.theme-icon {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Theme toggle group styles */
+.theme-toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--surface-color);
+    border-radius: 1.5rem;
+    padding: 0.15rem 0.25rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.theme-toggle-option {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    outline: none;
+    position: relative;
+}
+
+.theme-toggle-option.active,
+.theme-toggle-option:focus {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+#theme-toggle-icon-light,
+#theme-toggle-icon-dark,
+#theme-toggle-icon-system {
+    font-size: 1.4rem;
+    color: inherit;
+    position: absolute;
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Base theme variables */
+:root {
+    /* typography */
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Dark theme (default) */
+:root[data-theme="dark"] {
+    --bg-color: #111827;
+    --surface-color: #1E293B;
+    --header-bg: rgba(17,24,39,0.92);
+    --text-primary: #F9FAFB;
+    --text-secondary: #D1D5DB;
+    --border-color: #374151;
+    --shadow-color: rgba(0,0,0,0.3);
+    --card-bg: #1E293B;
+    --hover-bg: #2D3748;
+    --accent-color: #38BDF8;
+    --accent-hover: #0EA5E9;
+}
+
+/* Light theme */
+:root[data-theme="light"] {
+    --bg-color: #ffffff;
+    --surface-color: #f8f9fa;
+    --header-bg: rgba(255,255,255,0.92);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a5568;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0,0,0,0.1);
+    --card-bg: #ffffff;
+    --hover-bg: #f1f5f9;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+}
+
+/* In light mode ensure the Dark option label/icon is visible (black) */
+:root[data-theme="light"] .theme-toggle-menuitem[data-theme="dark"] {
+    color: #000 !important;
+}
+
+:root[data-theme="light"] .theme-toggle-menuitem[data-theme="dark"] .theme-icon {
+    color: #000 !important;
+}
+
+/* Theme toggle button styles */
+#theme-toggle {
+    background-color: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1.5rem;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+#theme-toggle:hover {
+    color: var(--accent-color);
+    transform: rotate(20deg);
+    background-color: var(--hover-bg);
+}
+
+/* Apply theme transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure nav-content aligns items properly */
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

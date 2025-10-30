@@ -1,0 +1,46 @@
+/* Theme-aware logo styles */
+:root {
+  --logo-primary: #000000;
+}
+
+[data-theme="dark"] {
+  --logo-primary: #ffffff;
+}
+
+[data-theme="light"] {
+  --logo-primary: #000000;
+}
+
+.brand-logo {
+  width: 40px; /* Reverted to original size */
+  height: 40px; /* Reverted to original size */
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease; /* Added filter to transition */
+}
+
+/* Enhanced logo styling for both themes */
+[data-theme="dark"] .brand-logo {
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)); /* White glow for dark theme */
+}
+
+[data-theme="light"] .brand-logo {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3)); /* Subtle dark shadow for light theme */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; /* Reverted to original gap */
+  text-decoration: none;
+}
+
+.brand:hover .brand-logo {
+  transform: scale(1.05);
+}
+
+.brand-name {
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: color 0.3s ease;
+}

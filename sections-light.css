@@ -1,0 +1,156 @@
+/* Enhanced Light Mode Section Styles */
+
+/* Hero Section */
+[data-theme="light"] .hero-section {
+    background: var(--section-bg-1);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="light"] .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 0% 0%, var(--section-accent-1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, var(--section-accent-2) 0%, transparent 50%);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+[data-theme="light"] .hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="light"] .hero-title {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 4px rgba(79, 70, 229, 0.1);
+}
+
+[data-theme="light"] .hero-description {
+    color: var(--text-secondary);
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Cards and Sections */
+[data-theme="light"] .career-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-glow);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .career-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.1),
+                0 12px 24px rgba(79, 70, 229, 0.15);
+}
+
+[data-theme="light"] .section-title {
+    color: var(--text-primary);
+    position: relative;
+}
+
+[data-theme="light"] .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--gradient-mid), var(--gradient-end));
+    border-radius: 3px;
+}
+
+/* Feature Sections */
+[data-theme="light"] .feature-section {
+    background: var(--section-bg-2);
+    position: relative;
+}
+
+[data-theme="light"] .feature-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-glow);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.1),
+                0 12px 24px rgba(79, 70, 229, 0.15);
+}
+
+/* Call to Action Sections */
+[data-theme="light"] .cta-section {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: white;
+}
+
+[data-theme="light"] .cta-content {
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="light"] .cta-button {
+    background: white;
+    color: var(--accent-color);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .cta-button:hover {
+    background: var(--accent-soft);
+    color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+/* Stats Section */
+[data-theme="light"] .stats-section {
+    background: var(--surface-color);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="light"] .stat-card {
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+[data-theme="light"] .stat-number {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* Testimonials Section */
+[data-theme="light"] .testimonial-section {
+    background: var(--section-bg-1);
+}
+
+[data-theme="light"] .testimonial-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-glow);
+}
+
+[data-theme="light"] .testimonial-text {
+    color: var(--text-secondary);
+}
+
+/* Animation Effects */
+@keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+[data-theme="light"] .animate-float {
+    animation: softFloat 3s ease-in-out infinite;
+}

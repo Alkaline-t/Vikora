@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="stylesheet" href="assets/global-fixes.css">
+  <link rel="stylesheet" href="assets/theme-enhancements.css">
+  <link rel="stylesheet" href="assets/theme-header.css">
+  <link rel="stylesheet" href="assets/modern-styles.css">
+  <link rel="stylesheet" href="assets/roadmap.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">
+        <span class="brand-text">𝓲𝓴𝓸𝓻𝓪</span>
+      </a>
+      <nav id="mainNav" class="nav" aria-label="Main navigation">
+        <ul class="nav-list">
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-btn" aria-pressed="false" title="Toggle theme">
+          <span class="icon" id="themeToggleIcon">🌙</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="roadmap-main">
+    <section class="hero-roadmap">
+      <h1>Your Personalized Career Roadmap</h1>
+      <p>Start your journey to a future-ready career with tailored guidance.</p>
+      <div class="roadmap-input-container">
+        <input type="text" id="careerInput" placeholder="Search for a career or topic...">
+        <button id="searchButton" class="search-button"><i class="fas fa-search"></i> Search</button>
+      </div>
+    </section>
+
+    <section class="career-options-section">
+      <h2>Explore Popular Career Paths</h2>
+      <div class="career-cards-grid">
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Dermatologist">
+          <h3>Dermatologist</h3>
+          <p>Specializes in diagnosing and treating skin, hair, and nail conditions.</p>
+        </div>
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Neurologist">
+          <h3>Neurologist</h3>
+          <p>Focuses on disorders of the nervous system, including the brain, spinal cord, and nerves.</p>
+        </div>
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Cardiologist">
+          <h3>Cardiologist</h3>
+          <p>Diagnoses and treats diseases of the heart and blood vessels.</p>
+        </div>
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Ethical Hacker">
+          <h3>Ethical Hacker</h3>
+          <p>Uses hacking techniques to identify vulnerabilities in systems for security improvement.</p>
+        </div>
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Prompt Engineer">
+          <h3>Prompt Engineer</h3>
+          <p>Designs and refines inputs for AI models to achieve desired outputs.</p>
+        </div>
+        <div class="career-card" data-modal-target="#roadmapModal" data-career="Penetration Tester">
+          <h3>Penetration Tester</h3>
+          <p>Simulates cyberattacks to find security weaknesses in computer systems, networks, or web applications.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="scripts/theme-manager.js"></script>
+  <script src="scripts/theme-toggle-custom.js"></script>
+  <script src="scripts/roadmap-logic.js"></script>
+  <script src="scripts/modal-manager.js"></script>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-buttons">
+        <div class="footer-about-link">
+          <a href="#" data-modal-target="#aboutModal">About</a>
+        </div>
+        <div class="footer-our-team-link">
+          <a href="#" data-modal-target="#ourTeamModal">Our Team</a>
+        </div>
+      </div>
+      <p class="footer-text"> © 2025 <img src="images/logo.png" alt="Future Skills Logo" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
+    </div>
+  </footer>
+
+  <div id="aboutModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <section class="detail-section">
+        <div class="section-container">
+          <h1>About <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">𝓲𝓴𝓸𝓻𝓪</h1>
+          <h1>💡 Why Vikora?</h1>
+          <p class="subtitle">Imagine a student who wants to become a photographer — but no one around them knows where to start, what skills are needed, or what path to follow.</p>
+          <p>The student turns to the internet and finds an overwhelming sea of information — thousands of opinions, guides, and personal experiences.</p>
+          <p>This is where Vikora steps in.</p>
+          <p>We bridge the gap by offering a personalized roadmap that helps students confidently navigate their journey — from learning to professional success.</p>
+          <h1>🌟 Key Features of Vikora</h1>
+          <h2>🎯 Career Roadmaps</h2>
+          <p>Get the right and most effective roadmap tailored to your chosen career — curated by professionals and verified mentors.</p>
+          <h2>🧠 Virtual Career Experience (VCE)</h2>
+          <p>Experience your future career before you pursue it.</p>
+          <p>VCE allows students to explore real-world tasks and responsibilities to understand what a career truly feels like — helping them make informed, confident decisions.</p>
+          <h2>💬 Talk to Experts</h2>
+          <p>Clear your doubts directly with experienced industry experts.</p>
+          <p>Through one-on-one sessions, students gain valuable insights, practical advice, and mentorship from professionals already thriving in their chosen fields.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="ourTeamModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <section class="detail-section">
+        <div class="section-container">
+          <h1><img src="images/logo 2.png" alt="Our Team Logo" class="our-team-modal-logo"> Our Team - <span class="gradient-text">Scan SmartRoots</span></h1>
+          <p><strong>Developer:</strong> Aarav Thakur</p>
+          <p><strong>Developer:</strong> Amit Kushwaha</p>
+          <p><strong>Other Team-Mates:-</strong></p>
+          <ol>
+            <li>Abujar</li>
+            <li>Akarshit Kumar</li>
+            <li>Kuldeep Chauhan</li>
+          </ol>
+          <p><strong>School Name:</strong> Shaheed Capt. Anuj Nayeer (SCAN) SBV NO.2 JANAKPURI B-BLOCK, NEW DELHI-110058</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div id="roadmapModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button">&times;</button>
+      <div class="roadmap-content" id="roadmapContent">
+        <!-- Roadmap content will be injected here by JavaScript -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

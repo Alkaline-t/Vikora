@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vik Ai – 𝓥𝓲𝓴𝓸𝓻𝓪</title>
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <link rel="stylesheet" href="assets/global-fixes.css" />
+  <link rel="stylesheet" href="assets/theme-enhancements.css" />
+  <link rel="stylesheet" href="assets/theme-header.css" />
+  <link rel="stylesheet" href="assets/theme-logo.css" />
+  <link rel="stylesheet" href="assets/ai-chat.css" />
+  <link rel="stylesheet" href="assets/detail-pages.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo" />
+        <span class="brand-text">𝓲𝓴𝓸𝓻𝓪</span>
+      </a>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-btn" title="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="chat-interface">
+    <div class="chat-window">
+      <div class="chat-header">
+        <span class="chat-title">Vik Ai Chatbot</span>
+        <button id="clearChatBtn" class="clear-chat-btn" title="Clear Chat">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message-bubble ai-message fade-in">
+          <img src="images/logo.png" alt="AI Logo" class="ai-message-logo" />
+          <span>Hi, I'm Vik Ai — your learning companion from 𝓥𝓲𝓴𝓸𝓻𝓪. How can I help you explore the future today?</span>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <input id="chatInput" type="text" placeholder="Ask me anything about AI or careers..." />
+        <button id="sendMessage">Send</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const chatInput = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendMessage");
+    const clearBtn = document.getElementById("clearChatBtn");
+    const themeBtn = document.getElementById("themeToggle");
+    const chatBox = document.getElementById("chatMessages");
+    let userName = null;
+
+    // Add mic and volume buttons
+    const micBtn = document.createElement("button");
+    micBtn.textContent = "🎙️";
+    micBtn.style.marginLeft = "8px";
+    chatInput.insertAdjacentElement("afterend", micBtn);
+
+    const volBtn = document.createElement("button");
+    volBtn.textContent = "🔊";
+    volBtn.style.marginLeft = "6px";
+    micBtn.insertAdjacentElement("afterend", volBtn);
+
+    let volumeLevel = 2;
+
+    volBtn.onclick = () => {
+      volumeLevel = (volumeLevel + 1) % 3;
+      if (volumeLevel === 2) volBtn.textContent = "🔊";
+      else if (volumeLevel === 1) volBtn.textContent = "🔉";
+      else volBtn.textContent = "🔇";
+    };
+
+    // Send button
+    sendBtn.addEventListener("click", sendMessage);
+    chatInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    // Clear chat
+    clearBtn.addEventListener("click", () => {
+      chatBox.innerHTML = `
+        <div class="message-bubble ai-message fade-in">
+          <img src="images/logo.png" alt="AI Logo" class="ai-message-logo" />
+          <span>Chat cleared! I'm Vik Ai — ready for a fresh start. What would you like to explore?</span>
+        </div>`;
+      speak("Chat cleared. I'm Vik Ai, ready for a fresh start!");
+    });
+
+    // 🌗 Theme Toggle + Auto-Detection
+function applyTheme(darkMode) {
+  document.body.classList.toggle("dark-mode", darkMode);
+  document.body.classList.toggle("light-mode", !darkMode);
+  themeBtn.textContent = darkMode ? "☀️" : "🌙";
+  speak(darkMode ? "Dark mode activated." : "Light mode activated.");
+}
+
+// Detect system preference
+const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+applyTheme(prefersDark);
+
+// Allow user to manually switch
+themeBtn.addEventListener("click", () => {
+  const darkMode = !document.body.classList.contains("dark-mode");
+  applyTheme(darkMode);
+});
+
+    // Voice recognition
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SR) {
+      const rec = new SR();
+      rec.lang = "en-IN";
+      rec.onresult = (e) => {
+        chatInput.value = e.results[0][0].transcript;
+        micBtn.textContent = "🎙️";
+        sendMessage();
+      };
+      rec.onerror = () => (micBtn.textContent = "🎙️");
+      micBtn.onclick = () => {
+        rec.start();
+        micBtn.textContent = "🎧 Listening...";
+      };
+    } else {
+      micBtn.style.display = "none";
+    }
+
+    // Main send logic
+    function sendMessage() {
+      const userText = chatInput.value.trim();
+      if (!userText) return;
+      chatBox.innerHTML += `<div class="message-bubble user-message">You: ${userText}</div>`;
+      chatInput.value = "";
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const loading = document.createElement("div");
+      loading.className = "message-bubble ai-message";
+      loading.innerHTML = `<img src="images/logo.png" class="ai-message-logo"><span>Vik Ai is thinking<span class="typing-indicator">...</span></span>`;
+      chatBox.appendChild(loading);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      setTimeout(() => {
+        loading.remove();
+        const reply = generateReply(userText);
+        chatBox.innerHTML += `
+          <div class="message-bubble ai-message fade-in">
+            <img src="images/logo.png" class="ai-message-logo" />
+            <span>${reply}</span>
+          </div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+        speak(reply);
+      }, 900);
+    }
+
+    // Replies — remembers user's name
+function generateReply(input) {
+  const text = input.toLowerCase().trim();
+  let reply = "";
+
+  // 👤 Detect and store user name
+  const nameMatch = text.match(/(my name is|i am)\s+([a-zA-Z]+)/);
+  if (nameMatch && nameMatch[2]) {
+    userName = nameMatch[2][0].toUpperCase() + nameMatch[2].slice(1);
+    return `Nice to meet you, ${userName}! I'll remember your name for this chat. 🚀`;
+  }
+
+  // Now check topics and include the name if known
+  const greetPrefix = userName ? `${userName}, ` : "";
+
+  // 🤖 AI / Tech Topics
+  if (text.includes("artificial intelligence") || text.includes("ai")) {
+    reply = `${greetPrefix}Artificial Intelligence is the science of making computers think and learn like humans. It powers chatbots, robots, and smart systems all around us.`;
+  }
+  else if (text.includes("robot") || text.includes("automation")) {
+    reply = `${greetPrefix}Robotics and automation are transforming industries — from factories to healthcare. AI helps robots make decisions in real time.`;
+  }
+  else if (text.includes("machine learning")) {
+    reply = `${greetPrefix}Machine Learning is a branch of AI where computers learn patterns from data instead of being explicitly programmed.`;
+  }
+
+  // 💼 Career Topics
+  else if (text.includes("career") || text.includes("job")) {
+    reply = `${greetPrefix}Some of the most exciting careers include AI Engineer, Data Scientist, Cybersecurity Analyst, and Robotics Developer.`;
+  }
+  else if (text.includes("future") && text.includes("skills")) {
+    reply = `${greetPrefix}Future-ready skills include coding, critical thinking, creativity, problem-solving, and digital literacy — essential for tomorrow's world.`;
+  }
+  else if (text.includes("prompt engineer") || text.includes("prompt engineering")) {
+    reply = `${greetPrefix}Here is a roadmap for Prompt Engineering:\n\n**Phase 1: Foundation (Weeks 1 – 2)**\n1️⃣ Understand what Artificial Intelligence (AI) and Natural Language Processing (NLP) mean.\n2️⃣ Learn how Large Language Models (LLMs) like GPT, Gemini, Claude work.\n3️⃣ Study how AI interprets prompts and generates answers.\n4️⃣ Watch beginner videos on YouTube — "Intro to Prompt Engineering by Andrew Ng."\n5️⃣ Explore the ChatGPT Playground to see how small wording changes affect results.\n\n**Phase 2: Prompting Basics (Weeks 3 – 4)**\n6️⃣ Learn the standard prompt format — Role + Task + Context + Example.\n7️⃣ Practice writing clear, specific prompts with exact instructions.\n8️⃣ Experiment with tone, style, and length controls.\n9️⃣ Try "temperature" and "max tokens" adjustments in the AI Playground.\n🔟 Write at least 10 different prompts daily and analyze the responses.\n\n**Phase 3: Advanced Prompt Design (Weeks 5 – 6)**\n11️⃣ Learn Few-Shot Prompting — give AI examples before your question.\n12️⃣ Learn Chain-of-Thought Prompting — ask AI to reason step-by-step.\n13️⃣ Master System Prompts — control AI's personality and limits.\n14️⃣ Practice Multi-Turn Prompting — build conversations that remember context.\n15️⃣ Study how changing one word in a prompt changes the logic or style.\n\n**Phase 4: Real-World Projects (Weeks 7 – 9)**\n16️⃣ Build a small AI Chatbot using OpenAI or Gemini API.\n17️⃣ Create an AI Study Assistant that helps students answer school questions.\n18️⃣ Develop an AI Content Writer that produces essays or blogs.\n19️⃣ Try connecting AI with a database (using LangChain or LlamaIndex).\n20️⃣ Test and improve your prompts to make them consistent and reliable.\n\n**Phase 5: Prompt Optimization & Automation (Weeks 10 – 12)**\n21️⃣ Learn Prompt Evaluation — compare which prompts perform best.\n22️⃣ Use A/B Testing — test multiple versions of the same prompt.\n23️⃣ Build Reusable Prompt Templates for similar tasks.\n24️⃣ Explore Flowise, PromptLayer, and Dust.tt for visual prompt flows.\n25️⃣ Start combining prompts with automation tools (like Zapier or Make).\n\n**Phase 6: Professional Growth (Ongoing)**\n26️⃣ Document your best prompts in a "Prompt Journal."\n27️⃣ Build a small Prompt Portfolio Website (use GitHub Pages or Vercel).\n28️⃣ Share your prompt experiments on LinkedIn or X (Twitter).\n29️⃣ Join communities — OpenAI Forum, LangChain Discord, Prompt Engineering Subreddit.\n30️⃣ Keep learning new AI updates and practice daily prompt crafting.\n\n**⚙️ Bonus: Tech Stack to Learn**\n31️⃣ Front-End Basics: HTML, CSS, JavaScript (or React).\n32️⃣ Back-End: Node.js or Python (Flask / FastAPI).\n33️⃣ APIs: OpenAI API, Gemini API, Claude API.\n34️⃣ Tools: LangChain, Pinecone (Vector Database), Vercel (for hosting).`;
+  }
+
+  // 🇮🇳 Vikora / Viksit Bharat
+  else if (text.includes("vikora") || text.includes("ikora")) {
+    reply = `${greetPrefix}Vikora is an educational initiative that helps students like you learn coding, AI, and innovation — aligned with India's Viksit Bharat vision.`;
+  }
+  else if (text.includes("viksit bharat") || text.includes("buildathon")) {
+    reply = `${greetPrefix}Viksit Bharat Buildathon inspires young minds to innovate for a self-reliant India under Atmanirbhar Bharat.`;
+  }
+
+  // 👋 Greetings & Common Chat
+  else if (["hi","hello","hey","greetings"].some(w => text.includes(w))) {
+    reply = userName
+      ? `Hey ${userName}! 👋 Ready to explore something new today?`
+      : "Hello there! 👋 I'm Vik Ai — your digital mentor from Ikora. What would you like to learn today?";
+  }
+  else if (text.includes("thank")) {
+    reply = `You're most welcome${userName ? ", " + userName : ""}! Keep exploring — curiosity is the best teacher. 😊`;
+  }
+  else if (text.includes("how are you")) {
+    reply = `I'm doing great${userName ? ", " + userName : ""}! Always ready to help you learn something futuristic. ⚡`;
+  }
+  else if (text.includes("what can you do") || text.includes("help")) {
+    reply = `${greetPrefix}I can explain AI, technology, careers, and future-ready skills — all in simple, school-friendly language!`;
+  }
+
+  // 🚫 Safety Filter
+  else if (["violence","hate","weapon","kill","suicide","bomb","porn","drug","terror"].some(w => text.includes(w))) {
+    reply = "I can't discuss unsafe or harmful topics. Let's focus on innovation and education!";
+  }
+
+  // 💡 Default
+  else {
+    reply = `${greetPrefix}That's an interesting question! Try asking me about AI, robotics, coding, or future careers 💡`;
+  }
+
+  return reply;
+}
+    // Speak function
+    function speak(text) {
+      if (!("speechSynthesis" in window)) return;
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = "en-IN";
+      utter.volume = volumeLevel === 0 ? 0 : volumeLevel === 1 ? 0.4 : 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utter);
+    }
+  });
+  </script>
+</body>
+</html>
+

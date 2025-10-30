@@ -1,0 +1,82 @@
+/* Global fixes for horizontal scrolling issues */
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* Container fixes */
+.container, 
+main, 
+section, 
+header, 
+footer {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+}
+
+/* Media content fixes */
+img, 
+video, 
+iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Table fixes */
+table {
+    max-width: 100%;
+    display: block;
+    overflow-x: auto;
+}
+
+/* Fix for mobile devices */
+@media screen and (max-width: 720px) {
+    .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+/* Floating Back-to-Home Button */
+.back-to-home {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #f7f7f8, #016bff);
+    color: #334557;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 999;
+    pointer-events: none;
+  }
+  
+  .back-to-home:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #334155, #0f172a);
+  }
+  
+  .back-to-home i {
+    font-size: 16px;
+  }
+  

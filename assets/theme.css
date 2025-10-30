@@ -1,0 +1,180 @@
+/* ===== Theme Variables and Color Management ===== */
+:root {
+    /* Light theme (default) */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --border-color: rgba(0, 0, 0, 0.15);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-bg: rgba(255, 255, 255, 0.98);
+    --accent-color: #9900ff;
+    --accent-hover: #7700cc;
+    --accent-color-rgb: 153, 0, 255;
+    --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --link-color: #7700cc;
+    --btn-text: #ffffff;
+    --card-bg: #ffffff;
+    --hover-bg: #f0f0f0;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(18, 18, 18, 0.98);
+    --accent-color: #bb66ff;
+    --accent-hover: #cc99ff;
+    --accent-color-rgb: 187, 102, 255;
+    --navbar-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    --link-color: #bb66ff;
+    --btn-text: #ffffff;
+    --card-bg: #1e1e1e;
+    --hover-bg: #2d2d2d;
+}
+
+/* ===== Global Transitions ===== */
+body, section, .card, .feature-card, .career-card, .navbar,
+.nav-link, .nav-item, .dropdown-item, .mobile-nav-item,
+.hero-title, .hero-description, h1, h2, h3, h4, h5, h6,
+a, p, span, .theme-toggle i {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ===== Body & Section Styling ===== */
+body, section {
+    color: var(--text-primary);
+    background: var(--bg-primary);
+}
+
+p, span:not(.gradient-text) {
+    color: var(--text-secondary);
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background: var(--accent-color);
+    color: var(--btn-text) !important;
+    font-weight: 600;
+    padding: 8px 15px; /* Reduced padding for a smaller button */
+    font-size: 0.9rem; /* Reduced font size for a smaller button */
+    border-radius: 6px; /* Slightly reduced border-radius */
+    border: none;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== Navbar & Links ===== */
+.navbar, .mobile-menu {
+    background: var(--header-bg) !important;
+    color: var(--text-primary);
+}
+
+.nav-link, .nav-item, .dropdown-item, .mobile-nav-item, .navbar-brand {
+    color: var(--text-primary) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, .nav-item:hover, .dropdown-item:hover, .mobile-nav-item:hover,
+a:hover {
+    color: var(--accent-color) !important;
+}
+
+.navbar a, .navbar .nav-link, .navbar .nav-item, .navbar .dropdown-item, .navbar .mobile-nav-item {
+    color: var(--text-primary) !important;
+}
+
+/* ===== Dropdowns ===== */
+.dropdown-menu, .mobile-dropdown {
+    background: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+.dropdown-item:hover {
+    background: var(--hover-bg);
+    color: var(--accent-color) !important;
+}
+
+/* ===== Cards ===== */
+.card, .feature-card, .career-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+.feature-icon {
+    color: var(--accent-color);
+}
+
+/* ===== Hero Section ===== */
+.hero-title, h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.hero-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* ===== Theme Toggle ===== */
+.theme-toggle {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.theme-toggle i {
+    color: var(--text-primary) !important;
+    font-size: 1.25rem;
+}
+
+/* ===== Links ===== */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+/* ===== Mobile Menu Items ===== */
+.mobile-nav-item {
+    color: var(--text-primary) !important;
+}
+
+.mobile-nav-item:hover {
+    background: var(--hover-bg);
+    color: var(--accent-color) !important;
+}
+    

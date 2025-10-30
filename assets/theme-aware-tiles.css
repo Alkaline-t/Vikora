@@ -1,0 +1,187 @@
+/* Theme-aware tiles and sections */
+:root {
+    --tile-bg: #ffffff;
+    --tile-text: #2d3436;
+    --tile-shadow: rgba(0, 0, 0, 0.1);
+    --tile-hover: rgba(0, 0, 0, 0.15);
+    --tile-border: rgba(0, 0, 0, 0.05);
+    --section-bg: #f8f9fa;
+    --heading-color: #1a1a1a;
+    --text-color: #4a4a4a;
+    --accent-gradient: linear-gradient(135deg, #6ee7b7, #3b82f6);
+}
+
+[data-theme="dark"] {
+    --tile-bg: #2d2d2d;
+    --tile-text: #ffffff;
+    --tile-shadow: rgba(0, 0, 0, 0.3);
+    --tile-hover: rgba(0, 0, 0, 0.4);
+    --tile-border: rgba(255, 255, 255, 0.05);
+    --section-bg: #1a1a1a;
+    --heading-color: #ffffff;
+    --text-color: #e0e0e0;
+    --accent-gradient: linear-gradient(135deg, #1e40af, #3730a3);
+}
+
+/* Tiles Grid Layout */
+.tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Individual Tile Styling */
+.tile {
+    background: var(--tile-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px var(--tile-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--tile-border);
+    backdrop-filter: blur(10px);
+}
+
+.tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-gradient);
+    transition: transform 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px var(--tile-hover);
+}
+
+.tile:hover::before {
+    transform: scaleX(1);
+}
+
+/* Tile Content Styling */
+.tile-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    padding: 1rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-radius: 12px;
+}
+
+.tile h3 {
+    color: var(--heading-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.tile p {
+    color: var(--text-color);
+    line-height: 1.6;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 0;
+}
+
+/* Feature List in Tiles */
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feature-list li {
+    background: var(--tile-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--tile-border);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.feature-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px var(--tile-shadow);
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-list li strong {
+    color: var(--heading-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.feature-list li p {
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Section Container */
+.section {
+    background: var(--section-bg);
+    padding: 4rem 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tiles-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+    }
+
+    .tile {
+        padding: 1.5rem;
+    }
+
+    .feature-list li {
+        padding: 1.25rem;
+    }
+}
+
+/* Animation for tiles */
+.tile {
+    animation: tileAppear 0.6s ease-out backwards;
+}
+
+.tiles-grid .tile:nth-child(1) { animation-delay: 0.1s; }
+.tiles-grid .tile:nth-child(2) { animation-delay: 0.2s; }
+.tiles-grid .tile:nth-child(3) { animation-delay: 0.3s; }
+.tiles-grid .tile:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes tileAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

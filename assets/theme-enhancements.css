@@ -1,0 +1,491 @@
+/* Theme enhancements: colors, fonts, layout tweaks and animations for
+   header, hero, footer and tiles. Safe, low-risk additions that layer
+   on top of existing styles. */
+
+:root{
+  --color-primary: #ff7a18; /* warm saffron-ish */
+  --color-accent: #00695c;  /* deep green accent */
+  --color-bg: #0f172a;     /* dark background */
+  --color-surface: #ffffff; /* surfaces */
+  --color-muted: #6b7280;
+  --glass: rgba(255,255,255,0.04);
+  --card-shadow: 0 10px 25px rgba(2,6,23,0.45);
+}
+
+/* Theme mode variables (switched via [data-theme] on <html>) */
+[data-theme="dark"]{
+  /* Deeper, richer dark palette with subtle highlights */
+  --bg-color: #02031a; /* near-black navy */
+  --text-color: #e9f2fb; /* very light, soft blue-white */
+  --surface-color: rgba(10,18,30,0.7); /* translucent card surface */
+  --muted-color: #9fb0c8;
+  --brand-color: #ffe6a2; /* Brighter gold/saffron for dark theme */
+  --header-contrast: rgba(255,255,255,0.03);
+  --theme-btn-border: rgba(255,255,255,0.06);
+}
+
+[data-theme="light"]{
+  --bg-color: #ffffff; /* pure white */
+  --text-color: #071129; /* dark text */
+  --surface-color: #ffffff;
+  --muted-color: #6b7280;
+  --brand-color: #0056b3; /* A slightly darker, more elegant blue for light theme */
+  --header-contrast: rgba(11,18,32,0.04);
+  --theme-btn-border: rgba(11,18,32,0.06);
+}
+
+/* Apply base background & text color */
+html, body{
+  /* Layered background for a richer dark-mode look while remaining subtle in light mode */
+  background: var(--bg-color);
+  background-image: 
+    radial-gradient(1200px 600px at 15% 10%, rgba(255,122,24,0.02), transparent 6%),
+    radial-gradient(900px 500px at 85% 85%, rgba(0,105,92,0.02), transparent 6%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-color);
+  transition: background-color .36s cubic-bezier(.2,.9,.3,1), color .24s ease;
+}
+
+/* Keep surfaces (cards) readable in dark mode */
+.card, .feature-card, .career-tile-item, .tile-content, .tile-modal-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+}
+@media (prefers-color-scheme: dark){
+  [data-theme="dark"] .card, [data-theme="dark"] .feature-card, [data-theme="dark"] .career-tile-item, [data-theme="dark"] .tile-content, [data-theme="dark"] .tile-modal-panel{
+    /* Softer, semi-transparent surfaces with inner glow */
+    background: linear-gradient(180deg, rgba(12,22,36,0.64), rgba(6,12,20,0.6));
+    color: var(--text-color);
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+}
+
+/* Prefer existing font stacks, fall back safely */
+body, .hero, .hero-section, .site-footer {
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Header tweaks */
+.navbar, .nav-container {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  backdrop-filter: blur(6px);
+}
+.nav-brand .brand-text{font-weight:700;letter-spacing:0.2px;color:var(--color-primary)}
+.nav-tools .theme-toggle-wrapper button{border-radius:8px;padding:6px 8px}
+
+/* Theme button (used in header) */
+.theme-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .75rem;border-radius:10px;border:1px solid var(--theme-btn-border);background:transparent;color:inherit;cursor:pointer;transition:transform .12s ease, background .12s ease}
+.theme-btn:hover{transform:translateY(-2px);background:rgba(255,255,255,0.02)}
+.theme-btn .icon{font-size:1.05rem}
+
+/* Modern header */
+.site-header{position:sticky;top:0;z-index:1100;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter:blur(8px);border-bottom:1px solid var(--header-contrast)}
+.site-header .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem}
+.brand{
+  font-weight: 900;
+  color: var(--brand-color);
+  text-decoration: none;
+  font-size: 1.45rem; /* Slightly larger for prominence */
+  letter-spacing: 0.8px; /* Increased letter spacing */
+}
+
+[data-theme="light"] .brand {
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2); /* Darker, subtle glow for light mode */
+}
+
+[data-theme="dark"] .brand {
+  text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.7); /* Subtle white glow for dark mode */
+}
+.nav{margin-left:1rem}
+.nav-list{display:flex;gap:1rem;list-style:none;margin:0;padding:0}
+.nav-list a{color:var(--text-color);text-decoration:none;padding:.5rem .75rem;border-radius:10px;transition:background .14s ease,color .14s ease;font-weight:600}
+.nav-list a:hover{background:rgba(255,122,24,0.06);color:var(--brand-color)}
+
+/* Dark-mode specific nav hover refinement */
+[data-theme="dark"] .nav-list a:hover{background:linear-gradient(90deg, rgba(255,122,24,0.04), rgba(0,105,92,0.02));color:var(--color-primary)}
+
+/* Responsive: hide nav on small screens */
+@media (max-width:720px){
+  .nav-list{display:none}
+}
+
+/* Footer adjustments: small and centered */
+.site-footer{padding:.45rem 1rem;background:transparent;border-top:1px solid rgba(11,18,32,0.04)}
+.site-footer .footer-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  flex-direction: column; /* Changed to column for vertical stacking */
+  align-items:center;
+  justify-content:center;
+  gap: 0.5rem; /* Added gap for spacing between items */
+}
+.site-footer .footer-text{margin:0;font-size:.95rem;color:var(--muted-color)}
+
+.footer-brand-logo {
+  width: 18px; /* Smaller size for footer logo */
+  height: 18px; /* Smaller size for footer logo */
+  vertical-align: middle;
+  margin-right: 0; /* Changed from 0.25rem to 0 */
+}
+
+/* Footer About link styling */
+.footer-buttons {
+  display: flex;
+  gap: 1rem; /* Adjust space between buttons */
+  margin-bottom: 0.5rem; /* Space between buttons and copyright */
+}
+
+.footer-about-link {
+  margin-bottom: 0; /* Remove individual margin as it's handled by parent */
+}
+
+.footer-our-team-link {
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem; /* Add some spacing between About and Our Team buttons */
+}
+
+.footer-about-link a,
+.footer-our-team-link a {
+  color: var(--color-primary); /* Use a prominent color */
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+[data-theme="dark"] .footer-about-link a,
+[data-theme="dark"] .footer-our-team-link a {
+  color: var(--text-color); /* Ensure visibility in dark mode */
+}
+
+.footer-about-link a:hover,
+.footer-our-team-link a:hover {
+  background: rgba(255,122,24,0.1); /* Subtle hover effect */
+  color: var(--color-primary);
+}
+
+/* Hero styling */
+.hero, .hero-section, .hero-container, .hero-content{
+  color: #0b1220;
+}
+.hero{background: linear-gradient(120deg, rgba(255,122,24,0.06), rgba(0,105,92,0.02));padding:6rem 1.25rem}
+.hero .hero-content h1, .hero-section .hero-title{
+  font-size:clamp(1.6rem, 3.8vw, 3.2rem);
+  line-height:1.05;
+  margin-bottom:0.6rem;
+  color:var(--color-primary);
+}
+.hero .hero-description, .hero p{color:var(--color-muted)}
+.gradient-text{background:linear-gradient(90deg,var(--color-primary),#ffb444);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+
+/* Buttons */
+.btn, .btn-primary, .feature-button, .tile-button{
+  border-radius:10px;transition:transform .18s ease, box-shadow .18s ease;
+}
+.btn-primary{background:linear-gradient(90deg,var(--color-primary),#ffb444);color:#fff;padding:.6rem .9rem;border:none}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(255,122,24,0.18)}
+
+/* Cards / Tiles */
+.card, .feature-card, .career-tile-item, .tile-content{
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+  border-radius:12px; padding:1.2rem; box-shadow:var(--card-shadow);
+}
+.career-tile-item{transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; transform:translateZ(0)}
+.career-tile-item:hover{transform:translateY(-10px) translateZ(0); box-shadow:0 20px 45px rgba(2,6,23,0.45)}
+.tile-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,122,24,0.12),rgba(0,105,92,0.06));font-size:22px;color:var(--color-primary)}
+.tile-hover{position:relative;transition:opacity .25s, transform .25s;opacity:0;margin-top:0.8rem}
+.career-tile-item:hover .tile-hover{opacity:1}
+.tile-button{background:var(--color-accent);color:#fff;padding:0.5rem 0.8rem;border-radius:8px;border:none}
+
+/* Small responsive grid touch */
+.career-tiles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem}
+
+/* Animations (lightweight, CSS-first) */
+@keyframes fadeUp {from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes float {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+@keyframes pulseShadow {0%{box-shadow:0 10px 25px rgba(2,6,23,0.12)}50%{box-shadow:0 18px 36px rgba(2,6,23,0.14)}100%{box-shadow:0 10px 25px rgba(2,6,23,0.12)}}
+
+.fade-in, .reveal-item, [data-animate="fade-up"]{animation:fadeUp .6s ease both}
+.floaty{animation:float 4s ease-in-out infinite}
+.career-tile-item.animate-pulse{animation:float 6s ease-in-out infinite, pulseShadow 6s ease-in-out infinite}
+
+/* Footer */
+.site-footer, footer{background:linear-gradient(180deg,#071126 0%, #03101a 100%);color:#9aa4b2;padding:2.2rem 1rem}
+.site-footer a, footer a{color:var(--color-primary);text-decoration:none}
+.site-footer .copyright{opacity:0.9}
+
+/* Light-mode footer override */
+[data-theme="light"] .site-footer, [data-theme="light"] footer {
+  background: #f8fafc; /* light neutral background */
+  color: #071129; /* dark text for legibility */
+  padding: 1.25rem 1rem;
+  border-top: 1px solid rgba(11,18,32,0.04);
+}
+
+[data-theme="light"] .site-footer a, [data-theme="light"] footer a {
+  color: var(--brand-color);
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition:none !important}
+}
+
+/* Small utility */
+.accent-text{color:var(--color-accent);font-weight:600}
+
+/* End of theme-enhancements.css */
+
+/* Modal / Tile form styles */
+.tile-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1200}
+.tile-modal[aria-hidden="false"]{display:flex}
+.tile-modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);backdrop-filter:blur(2px)}
+.tile-modal-panel{background:var(--color-surface);border-radius:12px;max-width:520px;width:calc(100% - 2rem);padding:1.25rem;position:relative;box-shadow:0 20px 60px rgba(2,6,23,0.5);transform:translateY(6px)}
+.tile-modal-close{position:absolute;right:10px;top:10px;background:transparent;border:none;font-size:1.4rem;color:var(--color-muted);cursor:pointer}
+.tile-modal-subtitle{margin:.25rem 0 0 0;color:var(--color-muted)}
+.tile-modal-form{display:flex;flex-direction:column;gap:.65rem;margin-top:0.8rem}
+.tile-modal-form label{display:flex;flex-direction:column;font-size:.95rem;color:#0b1220}
+.tile-modal-form input[type="text"], .tile-modal-form input[type="email"], .tile-modal-form textarea{padding:.6rem .7rem;border:1px solid rgba(11,18,32,0.06);border-radius:8px;font-size:0.95rem}
+.tile-modal-actions{display:flex;gap:.6rem;justify-content:flex-end;margin-top:.5rem}
+.clickable-card{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+.clickable-card:focus,.clickable-card:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(2,6,23,0.12);outline:2px solid rgba(0,105,92,0.08)}
+
+/* Global smooth scrolling */
+html { scroll-behavior: smooth; }
+
+/* Focus-visible styles for accessibility */
+:focus { outline: none; }
+:focus-visible {
+  outline: 3px solid rgba(34,197,94,0.9); /* green focus ring */
+  outline-offset: 3px;
+}
+
+/* How-to modal styles */
+.howto-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1400}
+.howto-modal[aria-hidden="false"]{display:flex}
+.howto-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);backdrop-filter:blur(4px)}
+.howto-panel{position:relative;z-index:1401;background:var(--color-surface);width:min(100%,980px);max-width:980px;border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(2,6,23,0.6)}
+.howto-header{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-bottom:1px solid rgba(0,0,0,0.06)}
+.howto-body{background:#000;padding:0;}
+.howto-iframe{width:100%;height:56vw;max-height:560px;border:0;display:block}
+.howto-close{background:transparent;border:none;font-size:1.25rem;padding:0.5rem 0.75rem;cursor:pointer}
+
+@media (max-width: 768px){
+  .howto-panel{width:calc(100% - 2rem);}
+  .howto-iframe{height:48vw;}
+}
+
+/* About Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s ease, opacity 0.3s ease;
+}
+
+.modal[aria-hidden="false"] {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: var(--surface-color); /* Changed from --color-surface to --surface-color */
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  width: 90%;
+  max-width: 600px; /* Square-ish size */
+  max-height: 90%;
+  overflow-y: auto;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+.modal[aria-hidden="false"] .modal-content {
+  transform: translateY(0);
+}
+
+.modal-content h1 {
+  color: var(--brand-color);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-content p,
+.modal-content ul,
+.modal-content li {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  color: var(--text-color); /* Ensure text color is visible based on theme */
+}
+
+.modal-content ul {
+  list-style: disc inside;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.modal-content blockquote {
+  font-style: italic;
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--glass);
+  border-left: 4px solid var(--color-primary);
+  border-radius: 8px;
+  color: var(--text-color); /* Ensure blockquote text color is visible */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.close-button:hover {
+  color: var(--color-primary);
+}
+
+/* Mobile-friendly footer tweaks */
+@media (max-width: 480px){
+  .site-footer .footer-inner{flex-direction:column;gap:0.4rem;padding:0.75rem 1rem}
+  .site-footer .footer-text{font-size:0.95rem}
+}
+
+/* Our Team Modal Logo Styling */
+.our-team-modal-logo {
+  height: 1.5em; /* Increased height to make the logo look more big */
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+/* AI Button Styles */
+.ai-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999 !important; /* Force on top */
+}
+
+.ai-button {
+  background-color: transparent; /* Changed to transparent */
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  width: 70px; /* Adjust width to be circular */
+  height: 70px; /* Adjust height to be circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.ai-button:hover {
+  background-color: transparent; /* Changed to transparent on hover */
+  transform: scale(1.05);
+}
+
+.ai-logo {
+  width: 70px; /* Logo size to fill the circular button */
+  height: 70px;
+  border-radius: 50%; /* Make the logo itself circular */
+  object-fit: cover; /* Ensure the image covers the entire circle */
+  /* Removed filter: invert(100%); Assuming logo.png is naturally white and will be visible on blue */
+}
+
+.ai-text {
+  display: none; /* Hide the text */
+  color: #ffffff; /* White text for contrast */
+  font-size: 0.75rem; /* Smaller font size to fit */
+  font-weight: 600;
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, 'Helvetica Neue', Arial;
+  text-align: center;
+  margin-top: 5px; /* Add some space between the button and the text */
+}
+
+/* Footer About/Our Team buttons in light mode should use visible color */
+[data-theme="light"] .footer-about-link a,
+[data-theme="light"] .footer-our-team-link a {
+  color: var(--text-color); /* Use dark color for contrast in light mode */
+  font-weight: 600;
+  background: #ececec;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.03);
+}
+[data-theme="light"] .footer-about-link a:hover,
+[data-theme="light"] .footer-our-team-link a:hover {
+  background: #e8eafc;
+  color: var(--color-primary);
+}
+[data-theme="dark"] .footer-about-link a,
+[data-theme="dark"] .footer-our-team-link a {
+  color: var(--text-color);
+  font-weight: 600;
+  background: rgba(18,18,24,0.8);
+  border-radius: 8px;
+}
+[data-theme="dark"] .footer-about-link a:hover,
+[data-theme="dark"] .footer-our-team-link a:hover {
+  background: #191c24;
+  color: var(--color-primary);
+}
+
+/* --- Brighten ALL feature/card/tile text (home page) in dark mode --- */
+[data-theme="dark"] .feature-card h3,
+[data-theme="dark"] .feature-card p,
+[data-theme="dark"] .tile h3,
+[data-theme="dark"] .tile p {
+  color: #fff !important;
+}
+
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .tile {
+  background: rgba(20,24,38,0.97) !important;
+  /* optional: add a soft border */
+  border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* --- Restore hero and header to previous state --- */
+.hero {
+  padding: 6rem 1.25rem !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: auto !important;
+    min-height: auto !important;
+    padding: 1.5rem 1rem !important;
+  }
+}
+
+.site-header {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+  backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid var(--header-contrast) !important;
+}
+
