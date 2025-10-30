@@ -145,7 +145,9 @@
           <label for="saanviMessage"><strong>Message</strong>:</label>
           <textarea id="saanviMessage" rows="4" style="width:100%; max-width:100%;"></textarea>
           <div style="margin-top:12px; display:flex; gap:8px;">
-            <button id="saanviSendBtn" class="cta-btn" type="button">Send Email</button>
+            <button id="saanviSendBtn" class="cta-btn saanvi-send-btn" type="button">
+              <span class="saanvi-send-icon">✉️</span> Send Email
+            </button>
           </div>
         </div>
       </section>
@@ -177,3 +179,30 @@
   </script>
 </body>
 </html>
+
+<style>
+.saanvi-send-btn {
+  background: linear-gradient(90deg, #ee0979, #ff6a00);
+  color: #fff!important;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 13px 28px 13px 18px;
+  box-shadow: 0 2px 12px rgba(238,9,121,0.15), 0 1.5px 6px rgba(255,106,0,0.12);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+}
+.saanvi-send-btn:hover {
+  background: linear-gradient(90deg, #ff6a00, #ee0979);
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 6px 22px 0 rgba(238,9,121,0.13), 0 3px 10px rgba(255,106,0,0.15);
+}
+.saanvi-send-icon {
+  font-size: 22px;
+  margin-right: 2px;
+}
+</style>
