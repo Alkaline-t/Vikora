@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vik Ai — Vikora</title>
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Poppins", sans-serif; }
+    body { background: #f6f8fa; overflow-x: hidden; }
+    #chatbot-container { width: 90%; max-width: 900px; height: 90vh; margin: 40px auto; border-radius: 18px; display: flex; flex-direction: column; background: #fff; border: 1.5px solid #e5e7ec; box-shadow: 0 8px 38px #abb7d511, 0 2px 8px #aab9e922; overflow: hidden; }
+    .chat-header { display: flex; justify-content: space-between; align-items: center; background: #18366a; color: #fff; padding: 18px 30px; border-bottom: 1px solid #e5e7ec; }
+    .chat-title { display: flex; align-items: center; gap: 10px; }
+    .chat-logo { width: 38px; height: 38px; border-radius: 50%; border:2px solid #fff; background:#fff; }
+    #chat-close { background: none; border: none; color: #fff; font-size: 26px; cursor: pointer; transition: 0.3s; font-weight:bold; }
+    #chat-close:hover { transform: rotate(90deg); color: #ff5757; }
+    #chat-window { flex: 1; overflow-y: auto; padding: 30px 28px 20px 28px; color: #1d2445; background: #f8faff; }
+    .message { margin-bottom: 16px; display: flex; animation: fadeMessage 0.5s ease; }
+    .message.user { justify-content: flex-end; }
+    .message.bot { justify-content: flex-start; }
+    .message-content { padding: 14px 19px; border-radius: 16px; max-width: 72%; word-wrap: break-word; font-size: 1.07rem; }
+    .user .message-content { background: #1860f2; color: #fff; border-bottom-right-radius: 7px; box-shadow: 0 2px 7px #3876c525; font-weight:500; }
+    .bot .message-content { background: #f1f6fa; border-bottom-left-radius: 7px; color: #23304b; border:1px solid #e0e8f3; font-weight:500; }
+    .typing-indicator { display: inline-block; width: 60px; height: 16px; }
+    .typing-indicator span { display: inline-block; width: 8px; height: 8px; margin: 0 2px; background: #bbb; border-radius: 50%; animation: bounce 1.2s infinite ease-in-out; }
+    .typing-indicator span:nth-child(1) { animation-delay: -0.4s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.2s; }
+    #chat-input-area { display: flex; padding: 16px; background: #f4f7fc; border-top: 1.5px solid #e5e7ec; }
+    #chat-input { flex: 1; border: 1.5px solid #e0e8f3; padding: 12px 15px; background: #fff; color: #222a52; outline: none; font-size: 1.08rem; border-radius: 12px; margin-right: 12px; transition: border-color .16s; }
+    #chat-input:focus { border-color: #1860f2; }
+    #chat-send { background: #18366a; border: none; color: #fff; padding: 11px 22px; cursor: pointer; border-radius: 11px; transition: 0.16s; font-size: 1.08rem; font-weight:600; }
+    #chat-send:hover { background: #2161d5; }
+    @keyframes fadeMessage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    @media (max-width: 700px) { #chatbot-container{height:98vh; margin:8px auto;} .chat-header{padding:12px;} #chat-window{padding:15px 5px 8px 7px;} #chat-input-area{padding:8px;} }
+  </style>
+</head>
+<body>
+<div id="chatbot-container">
+  <div class="chat-header">
+    <div class="chat-title">
+      <img class="chat-logo" src="images/logo.png" alt="Vik Ai" />
+      <div>
+        <div style="font-weight:700;">Vik Ai — Vikora</div>
+        <div style="font-size:12px;opacity:.9;font-weight:400;">Your learning companion for Future-Ready Skills</div>
+      </div>
+    </div>
+    <button id="chat-close" aria-label="Close" onclick="window.close();">×</button>
+  </div>
+
+  <div id="chat-window"></div>
+  <div id="chat-input-area">
+    <input id="chat-input" type="text" placeholder="Ask anything about education, AI, careers…" autocomplete="off" />
+    <button id="chat-send">Send</button>
+  </div>
+</div>
+<script>
+  // Built-in Q&A database
+  const vikoraFAQ = [
+    { qs: ["what is vikora", "about vikora"], a: "Vikora is an AI-powered platform that provides innovative solutions for businesses and individuals. Our mission is to empower users with cutting-edge technology and expertise to drive growth and success." },
+    { qs: ["how does vikora work", "how vikora works", "explain vikora"], a: "Vikora uses advanced AI algorithms to analyze data and provide insights, automate processes, and enhance decision-making. Our platform is designed to be user-friendly and accessible, making it easy to integrate into your workflow." },
+    { qs: ["what is viksit bharat buildathon", "viksit bharat buildathon"], a: "Viksit Bharat Buildathon is a flagship initiative by Vikora that aims to bring together innovators, developers, and entrepreneurs to build solutions for a developed India. The program provides a platform for participants to showcase their ideas, collaborate with experts, and win exciting prizes." },
+    { qs: ["what is ai", "what is artificial intelligence", "explain ai", "explain artificial intelligence"], a: "Artificial Intelligence (AI) refers to the development of computer systems that can perform tasks that typically require human intelligence, such as learning, problem-solving, and decision-making. AI is a rapidly growing field that is transforming industries and revolutionizing the way we live and work." },
+    { qs: ["hello", "how are you", "hi", "hey", "hey there"], a: "I'm doing great, thanks for asking! I'm here to help you with any questions or information you need." },
+    { qs: ["who are you", "who is vikora", "your name"], a: "I'm Vikora, your AI assistant. I'm here to provide you with information and support on our platform and services." },
+    { qs: ["what can you do", "how can you help me", "what help do you offer", "your abilities"], a: "I can answer your questions, provide information, and assist you with any queries you may have about Vikora and our services." },
+    { qs: ["how do i contact vikora", "contact vikora", "vikora contact"], a: "You can contact Vikora through our website, email, or phone. We're available 24/7 to assist you." },
+    { qs: ["what are the benefits of using vikora", "benefits of vikora", "what are the advantages of vikora", "advantages of vikora"], a: "Vikora offers numerous benefits, including increased efficiency, improved accuracy, enhanced decision-making, and cost savings. Our platform is designed to help businesses and individuals streamline processes, reduce errors, and achieve their goals." },
+    { qs: ["how can vikora help my business", "can vikora help my business"], a: "Vikora can help your business by providing innovative solutions, improving efficiency, and enhancing decision-making. Our platform is designed to help businesses streamline processes, reduce errors, and achieve their goals." },
+    { qs: ["is vikora secure", "is vikora safe", "vikora security", "vikora safe to use"], a: "Absolutely! Vikora takes data security and privacy extremely seriously. Our platform is built with enterprise-grade security features and is compliant with industry standards." },
+    { qs: ["what is the mission of vikora", "vikora mission"], a: "Vikora's mission is to empower users with cutting-edge technology and expertise to drive growth and success." },
+    { qs: ["who can use vikora"], a: "Vikora is designed for businesses, individuals, and organizations of all sizes and industries." },
+    { qs: ["can i try vikora before purchasing", "vikora free trial", "trial of vikora"], a: "Yes, Vikora offers a free trial or demo version. Please contact our sales team for more information." },
+    { qs: ["how does vikora handle customer data", "vikora customer data"], a: "Vikora takes data security and privacy extremely seriously and handles customer data with utmost care and confidentiality." },
+    { qs: ["pricing plan for vikora", "vikora pricing", "vikora price", "cost of vikora"], a: "Vikora offers flexible pricing plans to suit different needs and budgets. Please visit our website or contact our sales team for more information." },
+    { qs: ["how can i get started with vikora", "get started with vikora", "start vikora", "how to start vikora"], a: "Getting started with Vikora is easy! Simply visit our website, sign up for an account, and explore our platform. Our team is also available to provide support and guidance to help you get started." },
+    { qs: ["what kind of support does vikora offer", "vikora support", "help from vikora"], a: "Vikora offers comprehensive support, including online resources, tutorials, and dedicated customer support. Our team is committed to ensuring that you get the most out of our platform." }
+  ];
+  // Set of bad/offensive words (simple)
+  const badWords = ['abuse','badword','fuck','shit','bastard','idiot','stupid','@#!','mad', 'dumb', 'fuck'];
+
+  // Normalize input: remove punctuation, lowercase, trim, etc
+  function normalize(str) {
+    return (str||'').toLowerCase().replace(/[^\w\s?]/g,'').replace(/\s+/g,' ').trim();
+  }
+  // Slightly fuzzy match: includes qs, or exact equals
+  function matchQuestion(input) {
+    let inNorm = normalize(input);
+    for (let entry of vikoraFAQ) {
+      for (let pat of entry.qs) {
+        let pNorm = normalize(pat);
+        if (inNorm === pNorm || inNorm.includes(pNorm) || pNorm.includes(inNorm)) {
+          return entry.a;
+        }
+      }
+    }
+    return null;
+  }
+  function containsBadWord(q) {
+    let test = normalize(q);
+    return badWords.some(bw => test.includes(bw));
+  }
+  // Setup for chat UI
+  var chatWindow = document.getElementById('chat-window');
+  var input = document.getElementById('chat-input');
+  var sendBtn = document.getElementById('chat-send');
+  function addMessage(text, who) {
+    var wrap = document.createElement('div');
+    wrap.className = 'message ' + (who || 'bot');
+    var bubble = document.createElement('div');
+    bubble.className = 'message-content';
+    bubble.textContent = text;
+    wrap.appendChild(bubble);
+    chatWindow.appendChild(wrap);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+  function addTyping() {
+    var wrap = document.createElement('div');
+    wrap.className = 'message bot';
+    var bubble = document.createElement('div');
+    bubble.className = 'message-content';
+    bubble.innerHTML = '<span class="typing-indicator"><span></span><span></span><span></span></span>';
+    wrap.appendChild(bubble);
+    chatWindow.appendChild(wrap);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    return wrap;
+  }
+  function greet(){
+    chatWindow.innerHTML = '';
+    addMessage("Hi — I’m Vik Ai. Ask me about careers, Future-Ready Skills, or Buildathon 2025.", 'bot');
+  }
+  function send(){
+    var text = (input.value || '').trim();
+    if(!text) return;
+    addMessage(text, 'user');
+    input.value = '';
+    // 1. database match
+    let ans = matchQuestion(text);
+    if(ans) {
+      setTimeout(() => addMessage(ans, 'bot'), 300);
+      return;
+    }
+    // 2. abuse/bad question
+    if(containsBadWord(text)) {
+      setTimeout(() => addMessage("I cannot answer that. Please improve your thinking capacity to talk. Let's focus on having a respectful and productive conversation.", 'bot'), 300);
+      return;
+    }
+    // 3. fallback to backend
+    var typing = addTyping();
+    fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ message: text }) })
+      .then(function(r){ return r.json(); })
+      .then(function(d){ typing.remove(); addMessage(d && d.reply ? d.reply : 'Sorry, I could not generate an answer.', 'bot'); })
+      .catch(function(){ typing.remove(); addMessage('Network error. Please try again later.', 'bot'); });
+  }
+  if (sendBtn) sendBtn.addEventListener('click', send);
+  if (input) input.addEventListener('keypress', function(e){ if(e.key === 'Enter') send(); });
+  greet();
+</script>
+</body>
+</html>
