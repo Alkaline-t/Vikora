@@ -6,6 +6,7 @@
   <title>𝓲𝓴𝓸𝓻𝓪 - Future Ready Skills</title>
   <link rel="icon" href="images/logo.png" type="image/png">
 
+  <!-- Styles -->
   <link rel="stylesheet" href="assets/global-fixes.css">
   <link rel="stylesheet" href="assets/theme-enhancements.css">
   <link rel="stylesheet" href="assets/theme-header.css">
@@ -18,53 +19,103 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    .tiles-section h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-weight: 700;
+    /* AI Chat Popup */
+    #ai-popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
+      z-index: 99999;
+      align-items: center;
+      justify-content: center;
     }
+    #ai-popup.active { display: flex; }
 
-    .feature-card {
+    .ai-popup-content {
+      width: 90%;
+      max-width: 900px;
+      height: 85vh;
       background: #fff;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 35px rgba(0,0,0,0.3);
+      animation: fadeIn 0.3s ease;
     }
 
-    .feature-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+    .ai-popup-content iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
-    .feature-card h3 {
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 10px;
-    }
-
-    .feature-card p {
+    .ai-popup-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 28px;
       color: #333;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .cta-btn {
-      background: #111;
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 8px;
-      display: inline-block;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
       transition: 0.3s;
     }
 
-    .cta-btn:hover {
-      background: #444;
+    .ai-popup-close:hover {
+      background: #ff4b5c;
+      color: #fff;
+      transform: rotate(90deg);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* How It Works Button for Mobile */
+    .how-it-works-mobile {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .how-it-works-btn {
+      background: linear-gradient(90deg, #ff6a00, #ee0979);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .how-it-works-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+
+    @media (max-width: 768px) {
+      .how-it-works-mobile { display: block; }
+      .desktop-howitworks { display: none; }
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
+
 <body>
 
+<!-- ===== Header ===== -->
 <header class="site-header" role="banner">
   <div class="header-inner">
     <a href="#home" class="brand">
@@ -73,77 +124,73 @@
     </a>
 
     <nav id="mainNav" class="nav" aria-label="Main navigation">
-      <ul class="nav-list"></ul>
+      <ul class="nav-list">
+        <li class="desktop-howitworks"><a href="#how-vikora-works">How It Works</a></li>
+      </ul>
     </nav>
 
     <div class="header-actions">
       <button id="themeToggle" class="theme-btn" aria-pressed="false" title="Toggle theme">
         <span class="icon" id="themeToggleIcon">🌙</span>
       </button>
-      <button class="howto-btn" aria-label="How to use this site" data-url="" data-mode="modal">How To Use</button>
     </div>
   </div>
 </header>
 
-<!-- Hero Section -->
+<!-- ===== Hero Section ===== -->
 <section id="home" class="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="panel">
       <h1>Building a Future-Ready Generation</h1>
-      <p>The world is changing faster than ever — and skills are the new superpower. From coding and creativity to communication and critical thinking, discover how you can prepare for the world of tomorrow, today.</p>
-
+      <p>The world is changing faster than ever — and skills are the new superpower.</p>
       <div class="search-container">
         <form class="hero-search" role="search" onsubmit="return false;">
           <input id="hero-search-input" name="q" type="search" placeholder="Search careers, simulations, experts..." aria-label="Search" autocomplete="off" data-search-category="universal"/>
-          <button type="button" class="hero-search-btn">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" style="margin-right: 4px;">
-              <path d="M8.5 3a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 8.5a6.5 6.5 0 1111.499 4.175l4.5 4.5a.75.75 0 11-1.06 1.06l-4.5-4.5A6.5 6.5 0 012 8.5z"/>
-              <path d="M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Search
-          </button>
-          <div id="search-results" class="search-results"></div>
+          <button type="button" class="hero-search-btn">🔍 Search</button>
         </form>
+      </div>
+
+      <!-- Mobile "How It Works" button -->
+      <div class="how-it-works-mobile">
+        <button class="how-it-works-btn" onclick="scrollToSection()">How It Works</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- New Features Section -->
-<section id="new-features" class="tiles-section">
+<!-- ===== Features ===== -->
+<section id="features" class="tiles-section">
   <div class="section-container">
     <div class="tiles-grid three-columns">
-      <a href="roadmap.html" target="_blank" class="tile feature-card-link">
+      <a href="roadmap.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>1. Get a Roadmap</u></h3>
-          <p>Discover personalized roadmaps tailored to your career aspirations.</p>
+          <p>Discover personalized roadmaps tailored to your career goals.</p>
         </div>
       </a>
-
-      <a href="virtual-career-experience.html" target="_blank" class="tile feature-card-link">
+      <a href="virtual-career-experience.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>2. Virtual Career Experience</u></h3>
-          <p>Explore careers with immersive virtual experiences.</p>
+          <p>Explore careers through immersive virtual experiences.</p>
         </div>
       </a>
-
-      <a href="talk-to-expert.html" target="_blank" class="tile feature-card-link">
+      <a href="talk-to-expert.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>3. Talk to Expert</u></h3>
-          <p>Connect with industry professionals for guidance.</p>
+          <p>Connect with professionals for personalized guidance.</p>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Trending Skills Section -->
+<!-- ===== Trending Skills ===== -->
 <section id="trending-skills" class="tiles-section">
   <div class="section-container">
     <h2>🚀 Trending Future Skills</h2>
     <div class="tiles-grid three-columns">
-      <div class="tile feature-card" data-modal-target="#aiModal" tabindex="0" role="button" aria-label="Show Artificial Intelligence details">
+      <div class="tile feature-card">
         <h3><u>1. Artificial Intelligence</u></h3>
         <p>Master the skill driving innovation — learn how AI is transforming industries.</p>
       </div>
@@ -159,8 +206,8 @@
   </div>
 </section>
 
-<!-- How It Works Section -->
-<section id="how-it-works" class="tiles-section">
+<!-- ===== How Vikora Works ===== -->
+<section id="how-vikora-works" class="tiles-section">
   <div class="section-container">
     <h2>⚙️ How Vikora Works</h2>
     <div class="tiles-grid three-columns">
@@ -180,14 +227,14 @@
   </div>
 </section>
 
-<!-- Testimonials Section -->
+<!-- ===== What Students Say ===== -->
 <section id="testimonials" class="tiles-section">
   <div class="section-container">
     <h2>💬 What Students Say</h2>
     <div class="tiles-grid three-columns">
       <div class="tile feature-card">
         <p>"Vikora helped me discover my passion for coding through a structured roadmap."</p>
-        <h4 data-modal-target="#priyaModal" style="cursor:pointer;text-decoration:underline;color:#3b438d;font-weight:600;">— Priya Sharma, Class 10</h4>
+        <h4>— Priya Sharma, Class 10</h4>
       </div>
       <div class="tile feature-card">
         <p>"The virtual experience gave me a real taste of being an architect."</p>
@@ -201,171 +248,53 @@
   </div>
 </section>
 
-<!-- Join the Movement Section -->
-<section id="join" class="tiles-section">
-  <div class="section-container">
-      </div>
-    </div>
-  </div>
-</section>
-
+<!-- ===== Footer ===== -->
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-buttons">
-      <div class="footer-about-link">
-        <a href="#" data-modal-target="#aboutModal">About</a>
-      </div>
-      <div class="footer-our-team-link">
-        <a href="#" data-modal-target="#ourTeamModal">Our Team</a>
-      </div>
+      <div class="footer-about-link"><a href="#" data-modal-target="#aboutModal">About</a></div>
+      <div class="footer-our-team-link"><a href="#" data-modal-target="#ourTeamModal">Our Team</a></div>
     </div>
-    <p class="footer-text"> © 2025 <img src="images/logo.png" alt="Future Skills Logo" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
+    <p class="footer-text">© 2025 <img src="images/logo.png" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
   </div>
 </footer>
 
+<!-- ===== AI Button ===== -->
+<div class="ai-button-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+  <button id="open-ai-popup" class="ai-button" title="Chat with AI" style="background:none;border:none;cursor:pointer;">
+    <img src="images/logo.png" alt="AI Logo" style="width:56px;height:56px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.18);">
+  </button>
+</div>
+
+<!-- ===== AI Popup ===== -->
+<div id="ai-popup">
+  <div class="ai-popup-content">
+    <button class="ai-popup-close" id="close-ai-popup">&times;</button>
+    <iframe src="https://alkaline-t.github.io/nextjs-ai-chatbot/" allow="microphone; camera; clipboard-write"></iframe>
+  </div>
+</div>
+
+<!-- ===== JS ===== -->
 <script src="scripts/theme-manager.js"></script>
 <script src="scripts/theme-toggle-custom.js"></script>
-<script src="scripts/mobile-menu.js" defer></script>
-<script src="scripts/scroll-animations.js" defer></script>
-<script src="scripts/search-v2.js" defer></script>
-<script src="scripts/howto.js" defer></script>
-<script src="scripts/tile-forms.js" defer></script>
-<script src="scripts/modal-manager.js" defer></script>
-<script src="scripts/universal-search.js" defer></script>
-
-<div class="ai-button-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <a href="chat.html" target="_blank" class="ai-button" title="Chat with AI">
-    <img src="images/logo.png" alt="AI Logo" class="ai-logo" style="width:56px; height:56px; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.18);">
-  </a>
-</div>
-
-<!-- Modal for Artificial Intelligence -->
-<div id="aiModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-button" aria-label="Close">&times;</button>
-    <section class="detail-section">
-      <div class="section-container">
-        <h2>Artificial Intelligence (AI)</h2>
-        <p><strong>What is AI?</strong><br>Artificial Intelligence refers to computer systems that perform tasks typically requiring human intelligence, such as learning, problem-solving, understanding language, vision, and decision-making.</p>
-        <h3>Advantages</h3>
-        <ul>
-          <li>Automates repetitive or dangerous tasks</li>
-          <li>Processes vast amounts of data quickly</li>
-          <li>Enables new technologies such as self-driving cars, medical diagnosis, and smart assistants</li>
-          <li>Reduces human error</li>
-        </ul>
-        <h3>Disadvantages</h3>
-        <ul>
-          <li>Potential job displacement due to automation</li>
-          <li>High initial development cost</li>
-          <li>Can have biases if trained improperly</li>
-          <li>Raises ethical and privacy concerns</li>
-        </ul>
-        <h3>Career Opportunities</h3>
-        <ul>
-          <li>AI/Machine Learning Engineer</li>
-          <li>Data Scientist</li>
-          <li>Robotics Engineer</li>
-          <li>AI Product Manager</li>
-          <li>Research Scientist</li>
-          <li>Natural Language Processing Engineer</li>
-        </ul>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- About Modal -->
-<div id="aboutModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-button">&times;</button>
-    <section class="detail-section">
-      <div class="section-container">
-        <h1>About <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">𝓲𝓴𝓸𝓻𝓪</h1>
-        <h1>💡 Why Vikora?</h1>
-        <p class="subtitle">Imagine a student who wants to become a photographer — but no one around them knows where to start, what skills are needed, or what path to follow.</p>
-        <p>The student turns to the internet and finds an overwhelming sea of information — thousands of opinions, guides, and personal experiences.</p>
-        <p>This is where Vikora steps in.</p>
-        <p>We bridge the gap by offering a personalized roadmap that helps students confidently navigate their journey — from learning to professional success.</p>
-        <h1>🌟 Key Features of Vikora</h1>
-        <h2>🎯 Career Roadmaps</h2>
-        <p>Get the right and most effective roadmap tailored to your chosen career — curated by professionals and verified mentors.</p>
-        <h2>🧠 Virtual Career Experience (VCE)</h2>
-        <p>Experience your future career before you pursue it.</p>
-        <p>VCE allows students to explore real-world tasks and responsibilities to understand what a career truly feels like — helping them make informed, confident decisions.</p>
-        <h2>💬 Talk to Experts</h2>
-        <p>Clear your doubts directly with experienced industry experts.</p>
-        <p>Through one-on-one sessions, students gain valuable insights, practical advice, and mentorship from professionals already thriving in their chosen fields.</p>
-      </div>
-    </section>
-  </div>
-</div>
-
-<!-- Our Team Modal -->
-<div id="ourTeamModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-button">&times;</button>
-    <section class="detail-section">
-      <div class="section-container">
-        <h1><img src="images/logo 2.png" alt="Our Team Logo" class="our-team-modal-logo"> Our Team - <span class="gradient-text">Scan SmartRoots</span></h1>
-        <p><strong>Developer:</strong> Aarav Thakur</p>
-        <p><strong>Developer:</strong> Amit Kushwaha</p>
-        <p><strong>Other Team-Mates:-</strong></p>
-        <ol>
-          <li>Abujar</li>
-          <li>Akarshit Kumar</li>
-          <li>Kuldeep Chauhan</li>
-        </ol>
-        <p><strong>School Name:</strong> Shaheed Capt. Anuj Nayeer (SCAN) SBV NO.2 JANAKPURI B-BLOCK, NEW DELHI-110058</p>
-      </div>
-    </section>
-  </div>
-</div>
+<script src="scripts/modal-manager.js"></script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Modal logic for AI card
-    document.querySelectorAll('[data-modal-target]')?.forEach(function(card){
-      card.addEventListener('click', function() {
-        var modalId = card.getAttribute('data-modal-target');
-        var modal = document.querySelector(modalId);
-        if (modal) { modal.setAttribute('aria-hidden', 'false'); }
-      });
-    });
-    document.querySelectorAll('.modal .close-button')?.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var modal = btn.closest('.modal');
-        if(modal){ modal.setAttribute('aria-hidden','true'); }
-      });
-    });
-    document.querySelectorAll('.modal').forEach(function(modal){
-      modal.addEventListener('click', function(e){
-        if(e.target===modal){ modal.setAttribute('aria-hidden', 'true'); }
-      });
-    });
+  // Scroll function for mobile button
+  function scrollToSection() {
+    document.querySelector('#how-vikora-works').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // AI popup logic
+  const openBtn = document.getElementById("open-ai-popup");
+  const closeBtn = document.getElementById("close-ai-popup");
+  const popup = document.getElementById("ai-popup");
+  openBtn.addEventListener("click", () => popup.classList.add("active"));
+  closeBtn.addEventListener("click", () => popup.classList.remove("active"));
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.classList.remove("active");
   });
 </script>
-<!-- Priya Sharma Modal -->
-<div id="priyaModal" class="modal" aria-hidden="true">
-  <div class="modal-content">
-    <button class="close-button" aria-label="Close">&times;</button>
-    <section class="detail-section">
-      <div class="section-container">
-        <h2>Priya Sharma</h2>
-        <ul style="margin-top:1.1em;margin-bottom:1.1em;font-size:1.07em;">
-          <li><strong>Name:</strong> Priya Sharma</li>
-          <li><strong>Age:</strong> 15</li>
-          <li><strong>Career path:</strong> Aspiring Software Developer</li>
-          <li><strong>Achievement:</strong> Built a school app and placed Top 5 in School Hackathon</li>
-        </ul>
-        <h3>Experience about Vikora</h3>
-        <p>Vikora helped me discover my passion for coding through a structured, step-by-step roadmap. I gained confidence and new skills I never thought I could master at my age!</p>
-        <h3>In what way do I use Vikora?</h3>
-        <p>I use Vikora’s career roadmaps and chat frequently to plan learning and ask tech questions whenever I get stuck.</p>
-      </div>
-    </section>
-    
-  </div>
-</div>
+
 </body>
 </html>
