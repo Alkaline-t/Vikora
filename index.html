@@ -187,7 +187,7 @@
     <div class="tiles-grid three-columns">
       <div class="tile feature-card">
         <p>"Vikora helped me discover my passion for coding through a structured roadmap."</p>
-        <h4>— Priya Sharma, Class 10</h4>
+        <h4 data-modal-target="#priyaModal" style="cursor:pointer;text-decoration:underline;color:#3b438d;font-weight:600;">— Priya Sharma, Class 10</h4>
       </div>
       <div class="tile feature-card">
         <p>"The virtual experience gave me a real taste of being an architect."</p>
@@ -571,5 +571,26 @@
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
   }
 </script>
+<!-- Priya Sharma Modal -->
+<div id="priyaModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-button" aria-label="Close">&times;</button>
+    <section class="detail-section">
+      <div class="section-container">
+        <h2>Priya Sharma</h2>
+        <ul style="margin-top:1.1em;margin-bottom:1.1em;font-size:1.07em;">
+          <li><strong>Name:</strong> Priya Sharma</li>
+          <li><strong>Age:</strong> 15</li>
+          <li><strong>Career path:</strong> Aspiring Software Developer</li>
+          <li><strong>Achievement:</strong> Built a school app and placed Top 5 in School Hackathon</li>
+        </ul>
+        <h3>Experience about Vikora</h3>
+        <p>Vikora helped me discover my passion for coding through a structured, step-by-step roadmap. I gained confidence and new skills I never thought I could master at my age!</p>
+        <h3>In what way do I use Vikora?</h3>
+        <p>I use Vikora’s career roadmaps and chat frequently to plan learning and ask tech questions whenever I get stuck.</p>
+      </div>
+    </section>
+  </div>
+</div>
 </body>
 </html>
