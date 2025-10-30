@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>𝓲𝓴𝓸𝓻𝓪 - Future Ready Skills</title>
+  <title>Vikora - Future Ready Skills</title>
   <link rel="icon" href="images/logo.png" type="image/png">
 
-  <!-- Styles -->
+  <!-- External Styles -->
   <link rel="stylesheet" href="assets/global-fixes.css">
   <link rel="stylesheet" href="assets/theme-enhancements.css">
   <link rel="stylesheet" href="assets/theme-header.css">
@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    /* AI Chat Popup */
+    /* ========== AI Chat Popup Styles ========== */
     #ai-popup {
       display: none;
       position: fixed;
@@ -78,7 +78,7 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* How It Works Button for Mobile */
+    /* ========== How It Works Button ========== */
     .how-it-works-mobile {
       display: none;
       text-align: center;
@@ -107,31 +107,29 @@
       .desktop-howitworks { display: none; }
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
 
 <body>
 
 <!-- ===== Header ===== -->
-<header class="site-header" role="banner">
+<header class="site-header">
   <div class="header-inner">
     <a href="#home" class="brand">
-      <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">
-      <span class="brand-text">𝓲𝓴𝓸𝓻𝓪</span>
+      <img src="images/logo.png" alt="Logo" class="brand-logo">
+      <span class="brand-text">Vikora</span>
     </a>
 
-    <nav id="mainNav" class="nav" aria-label="Main navigation">
+    <nav id="mainNav" class="nav">
       <ul class="nav-list">
         <li class="desktop-howitworks"><a href="#how-vikora-works">How It Works</a></li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <button id="themeToggle" class="theme-btn" aria-pressed="false" title="Toggle theme">
-        <span class="icon" id="themeToggleIcon">🌙</span>
+      <button id="themeToggle" class="theme-btn" title="Toggle Theme">
+        <span id="themeToggleIcon">🌙</span>
       </button>
     </div>
   </div>
@@ -145,13 +143,11 @@
       <h1>Building a Future-Ready Generation</h1>
       <p>The world is changing faster than ever — and skills are the new superpower.</p>
       <div class="search-container">
-        <form class="hero-search" role="search" onsubmit="return false;">
-          <input id="hero-search-input" name="q" type="search" placeholder="Search careers, simulations, experts..." aria-label="Search" autocomplete="off" data-search-category="universal"/>
+        <form class="hero-search" onsubmit="return false;">
+          <input type="search" placeholder="Search careers, simulations, experts..." autocomplete="off">
           <button type="button" class="hero-search-btn">🔍 Search</button>
         </form>
       </div>
-
-      <!-- Mobile "How It Works" button -->
       <div class="how-it-works-mobile">
         <button class="how-it-works-btn" onclick="scrollToSection()">How It Works</button>
       </div>
@@ -159,33 +155,33 @@
   </div>
 </section>
 
-<!-- ===== Features ===== -->
+<!-- ===== Feature Cards ===== -->
 <section id="features" class="tiles-section">
   <div class="section-container">
     <div class="tiles-grid three-columns">
       <a href="roadmap.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>1. Get a Roadmap</u></h3>
-          <p>Discover personalized roadmaps tailored to your career goals.</p>
+          <p>Discover personalized roadmaps tailored to your career aspirations.</p>
         </div>
       </a>
       <a href="virtual-career-experience.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>2. Virtual Career Experience</u></h3>
-          <p>Explore careers through immersive virtual experiences.</p>
+          <p>Explore careers with immersive virtual experiences.</p>
         </div>
       </a>
       <a href="talk-to-expert.html" class="tile feature-card-link">
         <div class="tile feature-card">
           <h3><u>3. Talk to Expert</u></h3>
-          <p>Connect with professionals for personalized guidance.</p>
+          <p>Connect with industry professionals for guidance.</p>
         </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ===== Trending Skills ===== -->
+<!-- ===== Trending Future Skills ===== -->
 <section id="trending-skills" class="tiles-section">
   <div class="section-container">
     <h2>🚀 Trending Future Skills</h2>
@@ -221,13 +217,13 @@
       </div>
       <div class="tile feature-card">
         <h3><u>3. Experience</u></h3>
-        <p>Try out real-world simulations to see what your future job feels like.</p>
+        <p>Try real-world simulations to see what your future job feels like.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== What Students Say ===== -->
+<!-- ===== Testimonials ===== -->
 <section id="testimonials" class="tiles-section">
   <div class="section-container">
     <h2>💬 What Students Say</h2>
@@ -255,22 +251,29 @@
       <div class="footer-about-link"><a href="#" data-modal-target="#aboutModal">About</a></div>
       <div class="footer-our-team-link"><a href="#" data-modal-target="#ourTeamModal">Our Team</a></div>
     </div>
-    <p class="footer-text">© 2025 <img src="images/logo.png" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
+    <p class="footer-text">© 2025 <img src="images/logo.png" class="footer-brand-logo"> Vikora</p>
   </div>
 </footer>
 
-<!-- ===== AI Button ===== -->
+<!-- ===== Floating AI Button ===== -->
 <div class="ai-button-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <button id="open-ai-popup" class="ai-button" title="Chat with AI" style="background:none;border:none;cursor:pointer;">
-    <img src="images/logo.png" alt="AI Logo" style="width:56px;height:56px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.18);">
+  <button id="open-ai-popup" class="ai-button" title="Chat with AI"
+    style="background:none;border:none;cursor:pointer;">
+    <img src="images/logo.png" alt="AI Logo"
+      style="width:56px;height:56px;border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,0.18);">
   </button>
 </div>
 
-<!-- ===== AI Popup ===== -->
+<!-- ===== AI Chat Popup ===== -->
 <div id="ai-popup">
   <div class="ai-popup-content">
     <button class="ai-popup-close" id="close-ai-popup">&times;</button>
-    <iframe src="https://alkaline-t.github.io/nextjs-ai-chatbot/" allow="microphone; camera; clipboard-write"></iframe>
+    <iframe id="ai-iframe"
+      src="https://alkaline-t.github.io/nextjs-ai-chatbot/"
+      allow="microphone; camera; clipboard-write"></iframe>
+    <div id="ai-overlay"
+      style="position:absolute;top:0;left:0;width:100%;height:100%;cursor:pointer;background:transparent;">
+    </div>
   </div>
 </div>
 
@@ -280,19 +283,25 @@
 <script src="scripts/modal-manager.js"></script>
 
 <script>
-  // Scroll function for mobile button
+  // Smooth scroll for mobile "How It Works"
   function scrollToSection() {
     document.querySelector('#how-vikora-works').scrollIntoView({ behavior: 'smooth' });
   }
 
-  // AI popup logic
+  // AI Popup Logic
   const openBtn = document.getElementById("open-ai-popup");
   const closeBtn = document.getElementById("close-ai-popup");
   const popup = document.getElementById("ai-popup");
+  const overlay = document.getElementById("ai-overlay");
+
   openBtn.addEventListener("click", () => popup.classList.add("active"));
   closeBtn.addEventListener("click", () => popup.classList.remove("active"));
-  popup.addEventListener("click", (e) => {
-    if (e.target === popup) popup.classList.remove("active");
+  popup.addEventListener("click", (e) => { if (e.target === popup) popup.classList.remove("active"); });
+
+  // Clicking inside AI preview → opens full chatbot in new tab
+  overlay.addEventListener("click", () => {
+    window.open("https://alkaline-t.github.io/nextjs-ai-chatbot/", "_blank");
+    popup.classList.remove("active");
   });
 </script>
 
