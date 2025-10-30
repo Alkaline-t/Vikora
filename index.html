@@ -143,7 +143,7 @@
   <div class="section-container">
     <h2>🚀 Trending Future Skills</h2>
     <div class="tiles-grid three-columns">
-      <div class="tile feature-card">
+      <div class="tile feature-card" data-modal-target="#aiModal" tabindex="0" role="button" aria-label="Show Artificial Intelligence details">
         <h3><u>1. Artificial Intelligence</u></h3>
         <p>Master the skill driving innovation — learn how AI is transforming industries.</p>
       </div>
@@ -211,6 +211,14 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
+    <div class="footer-buttons">
+      <div class="footer-about-link">
+        <a href="#" data-modal-target="#aboutModal">About</a>
+      </div>
+      <div class="footer-our-team-link">
+        <a href="#" data-modal-target="#ourTeamModal">Our Team</a>
+      </div>
+    </div>
     <p class="footer-text"> © 2025 <img src="images/logo.png" alt="Future Skills Logo" class="footer-brand-logo">𝓲𝓴𝓸𝓻𝓪</p>
   </div>
 </footer>
@@ -230,6 +238,113 @@
     <img src="images/logo.png" alt="AI Logo" class="ai-logo" style="width:56px; height:56px; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.18);">
   </a>
 </div>
+
+<!-- Modal for Artificial Intelligence -->
+<div id="aiModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-button" aria-label="Close">&times;</button>
+    <section class="detail-section">
+      <div class="section-container">
+        <h2>Artificial Intelligence (AI)</h2>
+        <p><strong>What is AI?</strong><br>Artificial Intelligence refers to computer systems that perform tasks typically requiring human intelligence, such as learning, problem-solving, understanding language, vision, and decision-making.</p>
+        <h3>Advantages</h3>
+        <ul>
+          <li>Automates repetitive or dangerous tasks</li>
+          <li>Processes vast amounts of data quickly</li>
+          <li>Enables new technologies such as self-driving cars, medical diagnosis, and smart assistants</li>
+          <li>Reduces human error</li>
+        </ul>
+        <h3>Disadvantages</h3>
+        <ul>
+          <li>Potential job displacement due to automation</li>
+          <li>High initial development cost</li>
+          <li>Can have biases if trained improperly</li>
+          <li>Raises ethical and privacy concerns</li>
+        </ul>
+        <h3>Career Opportunities</h3>
+        <ul>
+          <li>AI/Machine Learning Engineer</li>
+          <li>Data Scientist</li>
+          <li>Robotics Engineer</li>
+          <li>AI Product Manager</li>
+          <li>Research Scientist</li>
+          <li>Natural Language Processing Engineer</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- About Modal -->
+<div id="aboutModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-button">&times;</button>
+    <section class="detail-section">
+      <div class="section-container">
+        <h1>About <img src="images/logo.png" alt="Future Skills Logo" class="brand-logo">𝓲𝓴𝓸𝓻𝓪</h1>
+        <h1>💡 Why Vikora?</h1>
+        <p class="subtitle">Imagine a student who wants to become a photographer — but no one around them knows where to start, what skills are needed, or what path to follow.</p>
+        <p>The student turns to the internet and finds an overwhelming sea of information — thousands of opinions, guides, and personal experiences.</p>
+        <p>This is where Vikora steps in.</p>
+        <p>We bridge the gap by offering a personalized roadmap that helps students confidently navigate their journey — from learning to professional success.</p>
+        <h1>🌟 Key Features of Vikora</h1>
+        <h2>🎯 Career Roadmaps</h2>
+        <p>Get the right and most effective roadmap tailored to your chosen career — curated by professionals and verified mentors.</p>
+        <h2>🧠 Virtual Career Experience (VCE)</h2>
+        <p>Experience your future career before you pursue it.</p>
+        <p>VCE allows students to explore real-world tasks and responsibilities to understand what a career truly feels like — helping them make informed, confident decisions.</p>
+        <h2>💬 Talk to Experts</h2>
+        <p>Clear your doubts directly with experienced industry experts.</p>
+        <p>Through one-on-one sessions, students gain valuable insights, practical advice, and mentorship from professionals already thriving in their chosen fields.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Our Team Modal -->
+<div id="ourTeamModal" class="modal" aria-hidden="true">
+  <div class="modal-content">
+    <button class="close-button">&times;</button>
+    <section class="detail-section">
+      <div class="section-container">
+        <h1><img src="images/logo 2.png" alt="Our Team Logo" class="our-team-modal-logo"> Our Team - <span class="gradient-text">Scan SmartRoots</span></h1>
+        <p><strong>Developer:</strong> Aarav Thakur</p>
+        <p><strong>Developer:</strong> Amit Kushwaha</p>
+        <p><strong>Other Team-Mates:-</strong></p>
+        <ol>
+          <li>Abujar</li>
+          <li>Akarshit Kumar</li>
+          <li>Kuldeep Chauhan</li>
+        </ol>
+        <p><strong>School Name:</strong> Shaheed Capt. Anuj Nayeer (SCAN) SBV NO.2 JANAKPURI B-BLOCK, NEW DELHI-110058</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Modal logic for AI card
+    document.querySelectorAll('[data-modal-target]')?.forEach(function(card){
+      card.addEventListener('click', function() {
+        var modalId = card.getAttribute('data-modal-target');
+        var modal = document.querySelector(modalId);
+        if (modal) { modal.setAttribute('aria-hidden', 'false'); }
+      });
+    });
+    document.querySelectorAll('.modal .close-button')?.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var modal = btn.closest('.modal');
+        if(modal){ modal.setAttribute('aria-hidden','true'); }
+      });
+    });
+    document.querySelectorAll('.modal').forEach(function(modal){
+      modal.addEventListener('click', function(e){
+        if(e.target===modal){ modal.setAttribute('aria-hidden', 'true'); }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>

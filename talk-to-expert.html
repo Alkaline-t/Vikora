@@ -46,7 +46,7 @@
     <section class="expert-contact-section">
       <h2>Our Panel of Experts</h2>
       <div class="expert-cards-grid">
-        <div class="expert-card">
+        <div class="expert-card" data-modal-target="#saanviModal" tabindex="0" role="button" aria-label="View Saanvi details">
           <h3>Saanvi</h3>
           <p>Ethical Hacker</p>
         </div>
@@ -125,6 +125,33 @@
     </div>
   </div>
 
+  <div id="saanviModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-button" aria-label="Close">&times;</button>
+      <section class="detail-section">
+        <div class="section-container">
+          <h2>Saanvi — Ethical Hacker</h2>
+          <div class="expert-details">
+            <p><strong>Name</strong>: Saanvi Sharma</p>
+            <p><strong>Age</strong>: 22</p>
+            <p><strong>Experience</strong>: 3 years</p>
+            <p><strong>College</strong>: XYZ Institute of Technology</p>
+            <p><strong>Achievement</strong>: Top 1% on bug bounty platforms</p>
+            <p><strong>Expertise in what</strong>: Web app security, OWASP Top 10, recon, API security</p>
+          </div>
+          <hr>
+          <h3>To contact</h3>
+          <p><strong>Email ID</strong>: <a href="mailto:saanvi@example.com">saanvi@example.com</a></p>
+          <label for="saanviMessage"><strong>Message</strong>:</label>
+          <textarea id="saanviMessage" rows="4" style="width:100%; max-width:100%;"></textarea>
+          <div style="margin-top:12px; display:flex; gap:8px;">
+            <button id="saanviSendBtn" class="cta-btn" type="button">Send Email</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
   <div class="ai-button-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
     <a href="http://localhost:3000" target="_blank" class="ai-button" title="Chat with AI">
       <img src="images/logo.png" alt="AI Logo" class="ai-logo" style="width:56px; height:56px; border-radius:50%; box-shadow:0 4px 12px rgba(0,0,0,0.18);">
@@ -135,5 +162,18 @@
   <script src="scripts/theme-toggle-custom.js"></script>
   <script src="scripts/modal-manager.js"></script>
   <script src="scripts/expert-logic.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('saanviSendBtn');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          var msgEl = document.getElementById('saanviMessage');
+          var msg = encodeURIComponent((msgEl && msgEl.value) ? msgEl.value : '');
+          var subject = encodeURIComponent('Inquiry from Vikora');
+          window.location.href = 'mailto:saanvi@example.com?subject=' + subject + '&body=' + msg;
+        });
+      }
+    });
+  </script>
 </body>
 </html>
