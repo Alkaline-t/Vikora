@@ -6,7 +6,7 @@
   <title>𝓥𝓲𝓴𝓸𝓻𝓪 - Future Ready Skills</title>
   <link rel="icon" href="images/logo.png" type="image/png">
 
-  <!-- External Styles -->
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="assets/global-fixes.css">
   <link rel="stylesheet" href="assets/theme-enhancements.css">
   <link rel="stylesheet" href="assets/theme-header.css">
@@ -19,13 +19,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
-    /* ========== How It Works Button ========== */
+    html { scroll-behavior: smooth; }
+
+    /* ======= Buttons ======= */
     .how-it-works-mobile {
       display: none;
       text-align: center;
       margin-top: 20px;
     }
-
     .how-it-works-btn {
       background: linear-gradient(90deg, #ff6a00, #ee0979);
       color: white;
@@ -37,55 +38,108 @@
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-
     .how-it-works-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     }
-
     @media (max-width: 768px) {
       .how-it-works-mobile { display: block; }
       .desktop-howitworks { display: none; }
     }
 
-    html { scroll-behavior: smooth; }
+    /* ======= Glow Colors ======= */
+    :root {
+      --glow1: rgba(255, 106, 0, 0.7);
+      --glow2: rgba(238, 9, 121, 0.6);
+      --glow3: rgba(255, 140, 0, 0.8);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --glow1: rgba(0, 204, 255, 0.7);
+        --glow2: rgba(173, 0, 255, 0.6);
+        --glow3: rgba(0, 140, 255, 0.8);
+      }
+    }
 
-    /* ========== Glowing Gradient AI Button ========== */
+    /* ======= AI Button Glow ======= */
+    #open-ai-chat {
+      position: relative;
+    }
     #open-ai-chat img {
-      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      background: linear-gradient(135deg, var(--glow1), var(--glow2));
       padding: 3px;
       border-radius: 50%;
       animation: gradientGlow 3s infinite ease-in-out;
-    }
-
-    @keyframes gradientGlow {
-      0% {
-        box-shadow: 0 0 10px rgba(255, 106, 0, 0.6),
-                    0 0 25px rgba(238, 9, 121, 0.5),
-                    0 0 40px rgba(255, 106, 0, 0.4);
-        transform: scale(1);
-      }
-      50% {
-        box-shadow: 0 0 20px rgba(255, 140, 0, 0.8),
-                    0 0 45px rgba(238, 9, 121, 0.6),
-                    0 0 70px rgba(255, 69, 0, 0.5);
-        transform: scale(1.08);
-      }
-      100% {
-        box-shadow: 0 0 10px rgba(255, 106, 0, 0.6),
-                    0 0 25px rgba(238, 9, 121, 0.5),
-                    0 0 40px rgba(255, 106, 0, 0.4);
-        transform: scale(1);
-      }
-    }
-
-    #open-ai-chat:hover img {
-      transform: scale(1.12);
-      box-shadow: 0 0 25px rgba(255, 140, 0, 0.9),
-                  0 0 55px rgba(238, 9, 121, 0.8),
-                  0 0 80px rgba(255, 69, 0, 0.6);
       transition: all 0.3s ease;
     }
+    @keyframes gradientGlow {
+      0% { box-shadow: 0 0 10px var(--glow1), 0 0 25px var(--glow2), 0 0 40px var(--glow3); transform: scale(1);}
+      50% { box-shadow: 0 0 20px var(--glow3), 0 0 45px var(--glow2), 0 0 70px var(--glow1); transform: scale(1.08);}
+      100% { box-shadow: 0 0 10px var(--glow1), 0 0 25px var(--glow2), 0 0 40px var(--glow3); transform: scale(1);}
+    }
+    #open-ai-chat:hover img {
+      transform: scale(1.12);
+      box-shadow: 0 0 25px var(--glow3), 0 0 55px var(--glow2), 0 0 80px var(--glow1);
+    }
+
+    /* ======= Tooltip ======= */
+    .tooltip {
+      visibility: hidden;
+      background: linear-gradient(90deg, var(--glow1), var(--glow2));
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 6px 12px;
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    #open-ai-chat:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ======= Modals ======= */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 25px;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+      animation: zoomIn 0.4s ease;
+    }
+    .close-button {
+      float: right;
+      font-size: 1.8rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--glow2);
+    }
+    .close-button:hover { color: var(--glow3); }
+
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes zoomIn { from {transform: scale(0.8);} to {transform: scale(1);} }
   </style>
 </head>
 
@@ -133,49 +187,14 @@
   </div>
 </section>
 
-<!-- ===== Feature Cards ===== -->
-<section id="features" class="tiles-section">
-  <div class="section-container">
-    <div class="tiles-grid three-columns">
-      <a href="roadmap.html" class="tile feature-card-link">
-        <div class="tile feature-card">
-          <h3><u>1. Get a Roadmap</u></h3>
-          <p>Discover personalized roadmaps tailored to your career aspirations.</p>
-        </div>
-      </a>
-      <a href="virtual-career-experience.html" class="tile feature-card-link">
-        <div class="tile feature-card">
-          <h3><u>2. Virtual Career Experience</u></h3>
-          <p>Explore careers with immersive virtual experiences.</p>
-        </div>
-      </a>
-      <a href="talk-to-expert.html" class="tile feature-card-link">
-        <div class="tile feature-card">
-          <h3><u>3. Talk to Expert</u></h3>
-          <p>Connect with industry professionals for guidance.</p>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Trending Future Skills ===== -->
+<!-- ===== Future Skills Section ===== -->
 <section id="trending-skills" class="tiles-section">
   <div class="section-container">
     <h2>🚀 Trending Future Skills</h2>
     <div class="tiles-grid three-columns">
-      <div class="tile feature-card">
-        <h3><u>1. Artificial Intelligence</u></h3>
-        <p>Master the skill driving innovation — learn how AI is transforming industries.</p>
-      </div>
-      <div class="tile feature-card">
-        <h3><u>2. Web Development</u></h3>
-        <p>Build powerful, responsive, and interactive websites from scratch.</p>
-      </div>
-      <div class="tile feature-card">
-        <h3><u>3. UI/UX Design</u></h3>
-        <p>Design digital experiences that connect creativity with usability.</p>
-      </div>
+      <div class="tile feature-card"><h3><u>1. Artificial Intelligence</u></h3><p>Master the skill driving innovation — learn how AI is transforming industries.</p></div>
+      <div class="tile feature-card"><h3><u>2. Web Development</u></h3><p>Build powerful, responsive, and interactive websites from scratch.</p></div>
+      <div class="tile feature-card"><h3><u>3. UI/UX Design</u></h3><p>Design digital experiences that connect creativity with usability.</p></div>
     </div>
   </div>
 </section>
@@ -185,18 +204,9 @@
   <div class="section-container">
     <h2>⚙️ How Vikora Works</h2>
     <div class="tiles-grid three-columns">
-      <div class="tile feature-card">
-        <h3><u>1. Discover</u></h3>
-        <p>Search and explore what truly excites you — from robotics to film.</p>
-      </div>
-      <div class="tile feature-card">
-        <h3><u>2. Learn</u></h3>
-        <p>Get curated roadmaps to develop the right skills for your dream field.</p>
-      </div>
-      <div class="tile feature-card">
-        <h3><u>3. Experience</u></h3>
-        <p>Try real-world simulations to see what your future job feels like.</p>
-      </div>
+      <div class="tile feature-card"><h3><u>1. Discover</u></h3><p>Search and explore what truly excites you — from robotics to film.</p></div>
+      <div class="tile feature-card"><h3><u>2. Learn</u></h3><p>Get curated roadmaps to develop the right skills for your dream field.</p></div>
+      <div class="tile feature-card"><h3><u>3. Experience</u></h3><p>Try real-world simulations to see what your future job feels like.</p></div>
     </div>
   </div>
 </section>
@@ -206,18 +216,9 @@
   <div class="section-container">
     <h2>💬 What Students Say</h2>
     <div class="tiles-grid three-columns">
-      <div class="tile feature-card">
-        <p>"Vikora helped me discover my passion for coding through a structured roadmap."</p>
-        <h4>— Priya Sharma, Class 10</h4>
-      </div>
-      <div class="tile feature-card">
-        <p>"The virtual experience gave me a real taste of being an architect."</p>
-        <h4>— Aarav Verma, Class 11</h4>
-      </div>
-      <div class="tile feature-card">
-        <p>"I finally understood which career suits me best — and how to get there."</p>
-        <h4>— Mehak Jain, Class 9</h4>
-      </div>
+      <div class="tile feature-card"><p>"Vikora helped me discover my passion for coding through a structured roadmap."</p><h4>— Priya Sharma, Class 10</h4></div>
+      <div class="tile feature-card"><p>"The virtual experience gave me a real taste of being an architect."</p><h4>— Aarav Verma, Class 11</h4></div>
+      <div class="tile feature-card"><p>"I finally understood which career suits me best — and how to get there."</p><h4>— Mehak Jain, Class 9</h4></div>
     </div>
   </div>
 </section>
@@ -226,37 +227,61 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-buttons">
-      <div class="footer-about-link"><a href="#" data-modal-target="#aboutModal">About</a></div>
-      <div class="footer-our-team-link"><a href="#" data-modal-target="#ourTeamModal">Our Team</a></div>
+      <div class="footer-about-link"><a href="#" id="openAbout">About</a></div>
+      <div class="footer-our-team-link"><a href="#" id="openTeam">Our Team</a></div>
     </div>
     <p class="footer-text">© 2025 <img src="images/logo.png" class="footer-brand-logo"> Vikora</p>
   </div>
 </footer>
 
-<!-- ===== Floating AI Button ===== -->
+<!-- ===== About Modal ===== -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('aboutModal')">&times;</button>
+    <h1>About 𝓥𝓲𝓴𝓸𝓻𝓪</h1>
+    <p>Vikora is a next-generation student mentorship platform helping learners find their true path through skill-based exploration, guidance, and real-world experience.</p>
+    <p>Our mission is to build a <strong>future-ready generation</strong> equipped with creativity, confidence, and clarity.</p>
+  </div>
+</div>
+
+<!-- ===== Our Team Modal ===== -->
+<div id="teamModal" class="modal">
+  <div class="modal-content">
+    <button class="close-button" onclick="closeModal('teamModal')">&times;</button>
+    <h1>Our Team</h1>
+    <p><strong>Developers:</strong> Aarav Thakur & Amit Kushwaha</p>
+    <p><strong>Team Members:</strong> Abujar, Akarshit Kumar, Kuldeep Chauhan</p>
+    <p><strong>School:</strong> Shaheed Capt. Anuj Nayeer (SCAN) SBV No.2, Janakpuri, New Delhi</p>
+  </div>
+</div>
+
+<!-- ===== AI Floating Button ===== -->
 <div class="ai-button-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-  <button id="open-ai-chat" class="ai-button" title="Chat with AI"
-    style="background:none;border:none;cursor:pointer;">
-    <img src="images/logo.png" alt="AI Logo"
-      style="width:56px;height:56px;border-radius:50%;transition:all 0.3s ease;">
+  <button id="open-ai-chat" class="ai-button">
+    <img src="images/logo.png" alt="AI Logo" style="width:56px;height:56px;border-radius:50%;">
+    <span class="tooltip">Chat with Vik AI</span>
   </button>
 </div>
 
 <!-- ===== JS ===== -->
 <script src="scripts/theme-manager.js"></script>
 <script src="scripts/theme-toggle-custom.js"></script>
-<script src="scripts/modal-manager.js"></script>
-
 <script>
-  // Smooth scroll for mobile "How It Works"
   function scrollToSection() {
-    document.querySelector('#how-vikora-works').scrollIntoView({ behavior: 'smooth' });
+    document.querySelector('#how-vikora-works')?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // === Open AI Chat in New Tab ===
+  // ✅ AI Button opens correct chatbot page
   document.getElementById("open-ai-chat").addEventListener("click", () => {
     window.open("https://alkaline-t.github.io/nextjs-ai-chatbot/", "_blank");
   });
+
+  // ✅ Modal Controls
+  function openModal(id) { document.getElementById(id).style.display = "block"; }
+  function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+  document.getElementById("openAbout").addEventListener("click", () => openModal('aboutModal'));
+  document.getElementById("openTeam").addEventListener("click", () => openModal('teamModal'));
 </script>
 
 </body>
