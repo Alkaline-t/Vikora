@@ -140,6 +140,34 @@
 
     @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
     @keyframes zoomIn { from {transform: scale(0.8);} to {transform: scale(1);} }
+
+    /* ======= Career Slider (Get a Roadmap) ======= */
+    .career-slider {
+      margin-top: 12px;
+      overflow: hidden;
+      position: relative;
+      border-radius: 8px;
+    }
+    .career-track {
+      display: flex;
+      gap: 12px;
+      width: max-content;
+      animation: scrollLeft 25s linear infinite;
+      padding: 6px 2px;
+    }
+    .career-pill {
+      background: linear-gradient(90deg, var(--glow1), var(--glow2));
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    @keyframes scrollLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
   </style>
 </head>
 
@@ -211,6 +239,26 @@
   </div>
 </section>
 
+<!-- ===== Core Actions ===== -->
+<section id="core-actions" class="tiles-section">
+  <div class="section-container">
+    <div class="tiles-grid three-columns">
+      <a class="tile feature-card" href="roadmap.html" style="text-decoration:none; color:inherit;">
+        <h3><u>Get a Roadmap</u></h3>
+        <p>Personalized step-by-step paths for careers you care about.</p>
+      </a>
+      <a class="tile feature-card" href="virtual-career-experience.html" style="text-decoration:none; color:inherit;">
+        <h3><u>Virtual Career Experience</u></h3>
+        <p>Interactive simulations to try careers before you choose.</p>
+      </a>
+      <a class="tile feature-card" href="talk-to-expert.html" style="text-decoration:none; color:inherit;">
+        <h3><u>Talk to Expert</u></h3>
+        <p>Book sessions with professionals for real insights and guidance.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== Testimonials ===== -->
 <section id="testimonials" class="tiles-section">
   <div class="section-container">
@@ -227,8 +275,8 @@
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-buttons">
-      <div class="footer-about-link"><a href="#" id="openAbout">About</a></div>
-      <div class="footer-our-team-link"><a href="#" id="openTeam">Our Team</a></div>
+      <div class="footer-about-link"><a href="#" id="openAbout" onclick="openModal('aboutModal'); return false;">About</a></div>
+      <div class="footer-our-team-link"><a href="#" id="openTeam" onclick="openModal('teamModal'); return false;">Our Team</a></div>
     </div>
     <p class="footer-text">© 2025 <img src="images/logo.png" class="footer-brand-logo"> Vikora</p>
   </div>
@@ -280,8 +328,15 @@
   function openModal(id) { document.getElementById(id).style.display = "block"; }
   function closeModal(id) { document.getElementById(id).style.display = "none"; }
 
-  document.getElementById("openAbout").addEventListener("click", () => openModal('aboutModal'));
-  document.getElementById("openTeam").addEventListener("click", () => openModal('teamModal'));
+  // Open About/Team as popups on the same page
+  const aboutBtn = document.getElementById('openAbout');
+  const teamBtn = document.getElementById('openTeam');
+  if (aboutBtn) {
+    aboutBtn.addEventListener('click', (e) => { e.preventDefault(); openModal('aboutModal'); });
+  }
+  if (teamBtn) {
+    teamBtn.addEventListener('click', (e) => { e.preventDefault(); openModal('teamModal'); });
+  }
 </script>
 
 </body>
