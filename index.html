@@ -168,6 +168,15 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
+
+    /* Center helper for single messages */
+    .full-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 40vh;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -268,6 +277,166 @@
       <div class="tile feature-card"><p>"The virtual experience gave me a real taste of being an architect."</p><h4>— Aarav Verma, Class 11</h4></div>
       <div class="tile feature-card"><p>"I finally understood which career suits me best — and how to get there."</p><h4>— Mehak Jain, Class 9</h4></div>
     </div>
+   <!-- Maintenance Notice Section -->
+<section class="maintenance-section" id="maintenance-section">
+  <div class="maintenance-box">
+    <span class="maintenance-icon">🛠️</span>
+    <h2 class="maintenance-title">Website Under Maintenance</h2>
+    <p class="maintenance-text">
+      Currently you can see the current content!
+    </p>
+    <p class="maintenance-extra">
+       We’re currently upgrading and improving your experience. 
+       Adding new content and features to make this platform easier to use and more helpful for your future.
+    </p>
+  </div>
+</section>
+
+<style>
+/* 🌈 Maintenance Section Styling */
+.maintenance-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  background: linear-gradient(135deg,
+    #0f172a,
+    #1e3a8a,
+    #6d28d9,
+    #be185d,
+    #0ea5e9,
+    #1e40af
+  );
+  background-size: 800% 800%;
+  animation: gradientShift 35s ease infinite;
+  color: #f8fafc;
+  text-align: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.3s ease;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.maintenance-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.maintenance-section.hide {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+  pointer-events: none;
+}
+
+.maintenance-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 55px 65px;
+  border-radius: 25px;
+  box-shadow: 0 0 45px rgba(255, 255, 255, 0.25);
+  max-width: 800px;
+  animation: glowPulse 5s ease-in-out infinite alternate;
+  backdrop-filter: blur(8px);
+}
+
+.maintenance-icon {
+  font-size: 70px;
+  display: block;
+  margin-bottom: 18px;
+  animation: iconPulse 3.8s infinite ease-in-out;
+}
+
+.maintenance-title {
+  font-size: 40px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.maintenance-text {
+  font-size: 19px;
+  opacity: 0.95;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.maintenance-extra {
+  font-size: 18px;
+  opacity: 0.9;
+  line-height: 1.6;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* 🌈 Gradient Animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ✨ Box and Icon Animations */
+@keyframes glowPulse {
+  from {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  }
+  to {
+    box-shadow: 0 0 70px rgba(255, 255, 255, 0.6);
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    text-shadow: 0 0 8px rgba(255,255,255,0.6);
+  }
+  50% {
+    transform: scale(1.1);
+    text-shadow: 0 0 20px rgba(255,255,255,1);
+  }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .maintenance-box {
+    padding: 35px 25px;
+  }
+  .maintenance-title {
+    font-size: 28px;
+  }
+  .maintenance-text,
+  .maintenance-extra {
+    font-size: 16px;
+  }
+  .maintenance-icon {
+    font-size: 55px;
+  }
+}
+</style>
+
+<script>
+/* 🔥 Fade-In & Auto-Hide Effect */
+document.addEventListener("DOMContentLoaded", function() {
+  const section = document.getElementById("maintenance-section");
+  setTimeout(() => {
+    section.classList.add("visible");
+  }, 300); // fade in smoothly
+
+  setTimeout(() => {
+    section.classList.add("hide");
+  }, 6000); // auto-hide after 6 seconds
+});
+</script>
   </div>
 </section>
 
