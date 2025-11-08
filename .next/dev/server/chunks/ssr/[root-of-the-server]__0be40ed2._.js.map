@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/91852/OneDrive/Desktop/Scan.AA-main/pages/index.js"],"sourcesContent":["export default function Home() {\r\n  return <h1>Welcome to Vikora!</h1>;\r\n}\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBAAO,qKAAC;kBAAG;;;;;;AACb","debugId":null}}]
+}
