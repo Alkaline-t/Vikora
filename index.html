@@ -293,131 +293,269 @@
 </section>
 
 <style>
-/* 🌈 Maintenance Section Styling */
+/* 🌈 Maintenance Section Styling - Enhanced */
 .maintenance-section {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 40vh;
   background: linear-gradient(135deg,
-    #0f172a,
-    #1e3a8a,
-    #6d28d9,
-    #be185d,
-    #0ea5e9,
-    #1e40af
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #4facfe 75%,
+    #00f2fe 100%
   );
-  background-size: 800% 800%;
-  animation: gradientShift 35s ease infinite;
-  color: #f8fafc;
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color: #ffffff;
   text-align: center;
   padding: 60px 20px;
   box-sizing: border-box;
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 1.3s ease;
-  z-index: 9999;
+  transform: scale(0.95);
+  transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 99999;
   overflow: hidden;
+}
+
+/* Floating particles background */
+.maintenance-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
+  animation: particleFloat 15s ease-in-out infinite;
+  pointer-events: none;
 }
 
 .maintenance-section.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: scale(1);
 }
 
 .maintenance-section.hide {
   opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
+  transform: scale(0.9);
+  transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   pointer-events: none;
+  visibility: hidden;
 }
 
 .maintenance-box {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 55px 65px;
-  border-radius: 25px;
-  box-shadow: 0 0 45px rgba(255, 255, 255, 0.25);
-  max-width: 800px;
-  animation: glowPulse 5s ease-in-out infinite alternate;
-  backdrop-filter: blur(8px);
+  position: relative;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 60px 70px;
+  border-radius: 30px;
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.37),
+    inset 0 0 60px rgba(255, 255, 255, 0.1);
+  max-width: 850px;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  animation: boxFloat 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Decorative corner accents */
+.maintenance-box::before,
+.maintenance-box::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  animation: cornerRotate 8s linear infinite;
+}
+
+.maintenance-box::before {
+  top: -10px;
+  left: -10px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.maintenance-box::after {
+  bottom: -10px;
+  right: -10px;
+  border-left: none;
+  border-top: none;
 }
 
 .maintenance-icon {
-  font-size: 70px;
+  font-size: 85px;
   display: block;
-  margin-bottom: 18px;
-  animation: iconPulse 3.8s infinite ease-in-out;
+  margin-bottom: 25px;
+  animation: iconBounce 2.5s infinite ease-in-out;
+  filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.4));
 }
 
 .maintenance-title {
-  font-size: 40px;
-  margin-bottom: 15px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  font-size: 48px;
+  margin-bottom: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #fff, #f0f0f0, #fff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: titleShimmer 3s ease-in-out infinite;
 }
 
 .maintenance-text {
-  font-size: 19px;
-  opacity: 0.95;
-  line-height: 1.6;
-  margin-bottom: 10px;
+  font-size: 22px;
+  opacity: 0.98;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .maintenance-extra {
-  font-size: 18px;
-  opacity: 0.9;
-  line-height: 1.6;
-  margin-top: 10px;
+  font-size: 19px;
+  opacity: 0.92;
+  line-height: 1.8;
+  margin-top: 15px;
   font-style: italic;
+  font-weight: 300;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* 🌈 Gradient Animation */
+/* 🌈 Enhanced Gradient Animation */
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
-  25% { background-position: 50% 100%; }
   50% { background-position: 100% 50%; }
-  75% { background-position: 50% 0%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ✨ Box and Icon Animations */
-@keyframes glowPulse {
-  from {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+/* ✨ Floating particle animation */
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0) scale(1); 
+    opacity: 0.6;
   }
-  to {
-    box-shadow: 0 0 70px rgba(255, 255, 255, 0.6);
+  50% { 
+    transform: translateY(-30px) scale(1.1); 
+    opacity: 0.8;
   }
 }
 
-@keyframes iconPulse {
+/* 📦 Box floating animation */
+@keyframes boxFloat {
+  0%, 100% { 
+    transform: translateY(0px);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      inset 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+  50% { 
+    transform: translateY(-15px);
+    box-shadow: 
+      0 15px 45px 0 rgba(31, 38, 135, 0.5),
+      inset 0 0 80px rgba(255, 255, 255, 0.15);
+  }
+}
+
+/* 🔄 Corner decoration rotation */
+@keyframes cornerRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🎯 Icon bounce animation */
+@keyframes iconBounce {
   0%, 100% {
-    transform: scale(1);
-    text-shadow: 0 0 8px rgba(255,255,255,0.6);
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-12px) scale(1.08) rotate(-5deg);
   }
   50% {
-    transform: scale(1.1);
-    text-shadow: 0 0 20px rgba(255,255,255,1);
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-6px) scale(1.04) rotate(5deg);
+  }
+}
+
+/* ✨ Title shimmer effect */
+@keyframes titleShimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
 
 /* 📱 Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .maintenance-section {
+    padding: 40px 15px;
+  }
+  
   .maintenance-box {
-    padding: 35px 25px;
+    padding: 40px 30px;
+    border-radius: 20px;
   }
+  
+  .maintenance-box::before,
+  .maintenance-box::after {
+    width: 60px;
+    height: 60px;
+  }
+  
   .maintenance-title {
-    font-size: 28px;
+    font-size: 32px;
+    margin-bottom: 15px;
   }
-  .maintenance-text,
+  
+  .maintenance-text {
+    font-size: 18px;
+  }
+  
   .maintenance-extra {
     font-size: 16px;
+    margin-top: 12px;
   }
+  
+  .maintenance-icon {
+    font-size: 65px;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maintenance-box {
+    padding: 30px 20px;
+  }
+  
+  .maintenance-title {
+    font-size: 26px;
+  }
+  
+  .maintenance-text,
+  .maintenance-extra {
+    font-size: 15px;
+  }
+  
   .maintenance-icon {
     font-size: 55px;
   }
@@ -428,12 +566,23 @@
 /* 🔥 Fade-In & Auto-Hide Effect */
 document.addEventListener("DOMContentLoaded", function() {
   const section = document.getElementById("maintenance-section");
+  const body = document.body;
+  
+  // Lock body scroll
+  body.style.overflow = 'hidden';
+  
+  // Fade in the maintenance overlay
   setTimeout(() => {
     section.classList.add("visible");
-  }, 300); // fade in smoothly
+  }, 200); // fade in smoothly
 
+  // Auto-hide after 6 seconds and restore scroll
   setTimeout(() => {
     section.classList.add("hide");
+    // Restore body scroll after animation completes
+    setTimeout(() => {
+      body.style.overflow = '';
+    }, 1200); // matches the hide transition duration
   }, 6000); // auto-hide after 6 seconds
 });
 </script>
