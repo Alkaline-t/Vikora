@@ -120,6 +120,7 @@
     }
     .modal-content {
       background-color: #fff;
+      color: #333;
       margin: 5% auto;
       padding: 25px;
       border-radius: 12px;
@@ -127,6 +128,29 @@
       max-width: 800px;
       box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
       animation: zoomIn 0.4s ease;
+      position: relative;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .modal-content {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+      }
+    }
+    
+    .modal-content h1, .modal-content h2, .modal-content h3 {
+      margin-top: 15px;
+      margin-bottom: 10px;
+    }
+    
+    .modal-content ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .modal-content p {
+      margin-bottom: 15px;
+      line-height: 1.6;
     }
     .close-button {
       float: right;
@@ -187,7 +211,7 @@
   <div class="header-inner">
     <a href="#home" class="brand">
       <img src="images/logo.png" alt="Logo" class="brand-logo">
-      <span class="brand-text">𝓥𝓲𝓴𝓸𝓻𝓪</span>
+      <span class="brand-text">𝓲𝓴𝓸𝓻𝓪</span>
     </a>
 
     <nav id="mainNav" class="nav">
@@ -685,19 +709,29 @@
 </style>
 
 <script>
-/* 🔥 Fade-In & Auto-Hide Effect */
+/* 🔥 Fade-In & Auto-Hide Effect - Show Once Per Session */
 document.addEventListener("DOMContentLoaded", function() {
   const section = document.getElementById("maintenance-section");
   
-  // Fade in the maintenance overlay
-  setTimeout(() => {
-    section.classList.add("visible");
-  }, 200); // fade in smoothly
+  // Check if maintenance message has been shown in this session
+  const hasSeenMaintenance = sessionStorage.getItem('vikoraMaintenanceSeen');
+  
+  if (!hasSeenMaintenance) {
+    // First time in this session - show the maintenance overlay
+    setTimeout(() => {
+      section.classList.add("visible");
+    }, 200); // fade in smoothly
 
-  // Auto-hide after 6 seconds
-  setTimeout(() => {
-    section.classList.add("hide");
-  }, 6000); // auto-hide after 6 seconds
+    // Auto-hide after 6 seconds
+    setTimeout(() => {
+      section.classList.add("hide");
+      // Mark as seen in sessionStorage (clears when browser closes)
+      sessionStorage.setItem('vikoraMaintenanceSeen', 'true');
+    }, 6000); // auto-hide after 6 seconds
+  } else {
+    // Already seen in this session - keep it hidden
+    section.style.display = 'none';
+  }
 });
 </script>
   </div>
@@ -707,8 +741,8 @@ document.addEventListener("DOMContentLoaded", function() {
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-buttons">
-      <div class="footer-about-link"><a href="#" id="openAbout" onclick="openModal('aboutModal'); return false;">About</a></div>
-      <div class="footer-our-team-link"><a href="#" id="openTeam" onclick="openModal('teamModal'); return false;">Our Team</a></div>
+      <div class="footer-about-link"><a href="#" id="openAbout">About</a></div>
+      <div class="footer-our-team-link"><a href="#" id="openTeam">Our Team</a></div>
     </div>
     <p class="footer-text"> 2025 <img src="images/logo.png" class="footer-brand-logo"> <span>𝓲𝓴𝓸𝓻𝓪</span>
   </div>
@@ -718,20 +752,24 @@ document.addEventListener("DOMContentLoaded", function() {
 <div id="aboutModal" class="modal">
   <div class="modal-content">
     <button class="close-button" onclick="closeModal('aboutModal')">&times;</button>
-    <h1>The Launchpad</h1>
-    <h2>What is The Launchpad ?</h2>
-    <p>It is an online career mentor Platform where students can get a path to their Career .</p>
-    <h2>Why is it needed ?</h2>
-    <p>Assume a student wants to become a Photographer and in their surroundings everybody doesn't know about how to become a Photographer and what is the right path. student research on the internet . We all know the internet has a huge amount of data by different Persons on their experiences and research data . Student is stuck with huge amounts of data . At this time The Launchpad help Student by providing a roadmap to achieve their Career .</p>
-    <h2>Key features of The Launchpad</h2>
+    <h1><img src="images/logo.png" alt="Logo" class="brand-logo" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 10px;">𝓲𝓴𝓸𝓻𝓪</h1>
+    <h3>What is Vikora?</h3>
+    <p>It is an online career mentor Platform where students can get a path to their Career.</p>
+    
+    <h3>Why is it needed?</h3>
+    <p>Assume a student wants to become a Photographer and in their surroundings everybody doesn't know about how to become a Photographer and what is the right path. student research on the internet. We all know the internet has a huge amount of data by different Persons on their experiences and research data. Student is stuck with huge amounts of data. At this time Vikora help Student by providing a roadmap to achieve their Career.</p>
+    
+    <h3>Key features of Vikora</h3>
     <ul>
-      <li>Get the right and best roadmap for your career .</li>
+      <li>Get the right and best roadmap for your career.</li>
       <li>Virtual Career Experience (VCE)</li>
       <li>Talk to Experts of their Career.</li>
     </ul>
-    <h2>What is Virtual Career Experience ?</h2>
+    
+    <h3>What is Virtual Career Experience?</h3>
     <p>Virtual Career Experience (VCE) It provides an experience and type of work to students before pursuing their Career.</p>
-    <h2>What is Talk to Experts of their Career ?</h2>
+    
+    <h3>What is Talk to Experts of their Career?</h3>
     <p>Talk to Expert of their Career this feature clears the doubt of students where students can talk to Experienced experts of their Career</p>
   </div>
 </div>
@@ -769,18 +807,47 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // ✅ Modal Controls
-  function openModal(id) { document.getElementById(id).style.display = "block"; }
-  function closeModal(id) { document.getElementById(id).style.display = "none"; }
+  function openModal(id) { 
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.style.display = "block";
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+  }
+  
+  function closeModal(id) { 
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+  }
 
   // Open About/Team as popups on the same page
   const aboutBtn = document.getElementById('openAbout');
   const teamBtn = document.getElementById('openTeam');
+  
   if (aboutBtn) {
-    aboutBtn.addEventListener('click', (e) => { e.preventDefault(); openModal('aboutModal'); });
+    aboutBtn.addEventListener('click', (e) => { 
+      e.preventDefault(); 
+      openModal('aboutModal'); 
+    });
   }
+  
   if (teamBtn) {
-    teamBtn.addEventListener('click', (e) => { e.preventDefault(); openModal('teamModal'); });
+    teamBtn.addEventListener('click', (e) => { 
+      e.preventDefault(); 
+      openModal('teamModal'); 
+    });
   }
+
+  // Close modal when clicking outside of it
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+      e.target.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
 </script>
 
 </body>
