@@ -296,57 +296,72 @@
 /* 🌈 Maintenance Section Styling - Enhanced */
 .maintenance-section {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 90%;
+  max-width: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg,
-    #667eea 0%,
-    #764ba2 25%,
-    #f093fb 50%,
-    #4facfe 75%,
-    #00f2fe 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+  background: transparent;
   color: #ffffff;
   text-align: center;
-  padding: 60px 20px;
+  padding: 0;
   box-sizing: border-box;
   opacity: 0;
-  transform: scale(0.95);
   transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 99999;
-  overflow: hidden;
+  overflow: visible;
 }
 
-/* Floating particles background */
-.maintenance-section::before {
+/* Semi-transparent backdrop overlay */
+.maintenance-section::after {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+  animation: fadeInBackdrop 1s ease;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Enhanced floating particles background */
+.maintenance-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
-  animation: particleFloat 15s ease-in-out infinite;
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 200, 255, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 40% 20%, rgba(200, 220, 255, 0.18) 0%, transparent 40%),
+    radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.12) 0%, transparent 35%),
+    radial-gradient(circle at 10% 90%, rgba(180, 200, 255, 0.15) 0%, transparent 45%);
+  animation: particleFloat 20s ease-in-out infinite;
   pointer-events: none;
+  opacity: 0.8;
 }
 
 .maintenance-section.visible {
   opacity: 1;
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .maintenance-section.hide {
   opacity: 0;
-  transform: scale(0.9);
+  transform: translate(-50%, -50%) scale(0.85);
   transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   pointer-events: none;
   visibility: hidden;
@@ -354,66 +369,107 @@
 
 .maintenance-box {
   position: relative;
-  background: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg,
+    rgba(102, 126, 234, 0.98) 0%,
+    rgba(118, 75, 162, 0.98) 25%,
+    rgba(240, 147, 251, 0.98) 50%,
+    rgba(79, 172, 254, 0.98) 75%,
+    rgba(0, 242, 254, 0.98) 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite, boxFloat 6s ease-in-out infinite;
   padding: 60px 70px;
-  border-radius: 30px;
+  border-radius: 35px;
   box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.37),
-    inset 0 0 60px rgba(255, 255, 255, 0.1);
-  max-width: 850px;
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  animation: boxFloat 6s ease-in-out infinite;
+    0 25px 80px 0 rgba(0, 0, 0, 0.6),
+    0 10px 40px 0 rgba(102, 126, 234, 0.4),
+    inset 0 0 80px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 20px rgba(255, 255, 255, 0.3);
+  width: 100%;
+  backdrop-filter: blur(15px) saturate(200%);
+  -webkit-backdrop-filter: blur(15px) saturate(200%);
+  border: 3px solid transparent;
+  background-clip: padding-box;
   z-index: 1;
+  overflow: hidden;
 }
 
-/* Decorative corner accents */
-.maintenance-box::before,
+/* Animated border glow */
 .maintenance-box::after {
   content: '';
   position: absolute;
-  width: 100px;
-  height: 100px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  animation: cornerRotate 8s linear infinite;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    #ff00ff, #00ffff, #ff00ff, #00ffff, #ff00ff);
+  background-size: 400% 400%;
+  border-radius: 35px;
+  z-index: -1;
+  animation: borderGlow 8s linear infinite;
+  opacity: 0.6;
+  filter: blur(8px);
 }
 
+/* Decorative corner accents */
 .maintenance-box::before {
-  top: -10px;
-  left: -10px;
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 25px;
+  top: -15px;
+  left: -15px;
   border-right: none;
   border-bottom: none;
-}
-
-.maintenance-box::after {
-  bottom: -10px;
-  right: -10px;
-  border-left: none;
-  border-top: none;
+  animation: cornerRotate 10s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
 }
 
 .maintenance-icon {
-  font-size: 85px;
+  font-size: 90px;
   display: block;
   margin-bottom: 25px;
   animation: iconBounce 2.5s infinite ease-in-out;
-  filter: drop-shadow(0 8px 20px rgba(255, 255, 255, 0.4));
+  filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 200, 255, 0.5));
+  position: relative;
+}
+
+/* Icon glow effect */
+.maintenance-icon::after {
+  content: attr(data-icon);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  filter: blur(20px);
+  opacity: 0.5;
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+@keyframes iconGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
 }
 
 .maintenance-title {
   font-size: 48px;
   margin-bottom: 20px;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   text-shadow: 
-    0 0 20px rgba(255, 255, 255, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to right, #fff, #f0f0f0, #fff);
+    0 0 30px rgba(255, 255, 255, 0.8),
+    0 0 60px rgba(255, 200, 255, 0.6),
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    0 2px 5px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(45deg, #ffffff, #f0f0ff, #fff0ff, #ffffff);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: titleShimmer 3s ease-in-out infinite;
+  animation: titleShimmer 4s ease-in-out infinite;
+  position: relative;
 }
 
 .maintenance-text {
@@ -422,20 +478,26 @@
   line-height: 1.7;
   margin-bottom: 15px;
   font-weight: 500;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.2);
+  animation: textFadeIn 1s ease-out 0.3s both;
 }
 
 .maintenance-extra {
   font-size: 19px;
-  opacity: 0.92;
+  opacity: 0.95;
   line-height: 1.8;
   margin-top: 15px;
   font-style: italic;
   font-weight: 300;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 15px rgba(255, 255, 255, 0.15);
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  animation: textFadeIn 1s ease-out 0.5s both;
 }
 
 /* 🌈 Enhanced Gradient Animation */
@@ -445,38 +507,78 @@
   100% { background-position: 0% 50%; }
 }
 
-/* ✨ Floating particle animation */
+/* ✨ Enhanced floating particle animation */
 @keyframes particleFloat {
-  0%, 100% { 
-    transform: translateY(0) scale(1); 
+  0% { 
+    transform: translate(0, 0) rotate(0deg) scale(1); 
     opacity: 0.6;
   }
-  50% { 
-    transform: translateY(-30px) scale(1.1); 
+  33% { 
+    transform: translate(30px, -40px) rotate(120deg) scale(1.15); 
     opacity: 0.8;
+  }
+  66% { 
+    transform: translate(-20px, -20px) rotate(240deg) scale(1.05); 
+    opacity: 0.7;
+  }
+  100% { 
+    transform: translate(0, 0) rotate(360deg) scale(1); 
+    opacity: 0.6;
   }
 }
 
-/* 📦 Box floating animation */
+/* 📦 Enhanced box floating animation */
 @keyframes boxFloat {
   0%, 100% { 
     transform: translateY(0px);
     box-shadow: 
-      0 8px 32px 0 rgba(31, 38, 135, 0.37),
-      inset 0 0 60px rgba(255, 255, 255, 0.1);
+      0 25px 80px 0 rgba(0, 0, 0, 0.6),
+      0 10px 40px 0 rgba(102, 126, 234, 0.4),
+      inset 0 0 80px rgba(255, 255, 255, 0.2),
+      inset 0 -2px 20px rgba(255, 255, 255, 0.3);
   }
   50% { 
-    transform: translateY(-15px);
+    transform: translateY(-20px);
     box-shadow: 
-      0 15px 45px 0 rgba(31, 38, 135, 0.5),
-      inset 0 0 80px rgba(255, 255, 255, 0.15);
+      0 35px 100px 0 rgba(0, 0, 0, 0.7),
+      0 15px 60px 0 rgba(102, 126, 234, 0.6),
+      inset 0 0 100px rgba(255, 255, 255, 0.25),
+      inset 0 -2px 30px rgba(255, 255, 255, 0.4);
   }
 }
 
 /* 🔄 Corner decoration rotation */
 @keyframes cornerRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { 
+    transform: rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% { 
+    transform: rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+/* 🌟 Border glow animation */
+@keyframes borderGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 📝 Text fade in animation */
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 🎯 Icon bounce animation */
@@ -495,20 +597,35 @@
   }
 }
 
-/* ✨ Title shimmer effect */
+/* ✨ Enhanced title shimmer effect */
 @keyframes titleShimmer {
-  0%, 100% {
+  0% {
     background-position: 0% 50%;
+    text-shadow: 
+      0 0 30px rgba(255, 255, 255, 0.8),
+      0 0 60px rgba(255, 200, 255, 0.6),
+      0 4px 15px rgba(0, 0, 0, 0.3);
   }
   50% {
     background-position: 100% 50%;
+    text-shadow: 
+      0 0 40px rgba(255, 255, 255, 1),
+      0 0 80px rgba(200, 200, 255, 0.8),
+      0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    background-position: 0% 50%;
+    text-shadow: 
+      0 0 30px rgba(255, 255, 255, 0.8),
+      0 0 60px rgba(255, 200, 255, 0.6),
+      0 4px 15px rgba(0, 0, 0, 0.3);
   }
 }
 
 /* 📱 Responsive Design */
 @media (max-width: 768px) {
   .maintenance-section {
-    padding: 40px 15px;
+    width: 95%;
   }
   
   .maintenance-box {
@@ -543,12 +660,17 @@
 }
 
 @media (max-width: 480px) {
+  .maintenance-section {
+    width: 95%;
+  }
+  
   .maintenance-box {
     padding: 30px 20px;
+    border-radius: 18px;
   }
   
   .maintenance-title {
-    font-size: 26px;
+    font-size: 24px;
   }
   
   .maintenance-text,
@@ -566,23 +688,15 @@
 /* 🔥 Fade-In & Auto-Hide Effect */
 document.addEventListener("DOMContentLoaded", function() {
   const section = document.getElementById("maintenance-section");
-  const body = document.body;
-  
-  // Lock body scroll
-  body.style.overflow = 'hidden';
   
   // Fade in the maintenance overlay
   setTimeout(() => {
     section.classList.add("visible");
   }, 200); // fade in smoothly
 
-  // Auto-hide after 6 seconds and restore scroll
+  // Auto-hide after 6 seconds
   setTimeout(() => {
     section.classList.add("hide");
-    // Restore body scroll after animation completes
-    setTimeout(() => {
-      body.style.overflow = '';
-    }, 1200); // matches the hide transition duration
   }, 6000); // auto-hide after 6 seconds
 });
 </script>
