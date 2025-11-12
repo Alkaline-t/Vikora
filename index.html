@@ -201,6 +201,25 @@
       min-height: 40vh;
       text-align: center;
     }
+
+    /* ======= New Section Helper Styles (keeps theme consistent) ======= */
+    .tiles-section { padding: 60px 20px; }
+    .section-container { max-width: 1100px; margin: 0 auto; }
+    .tiles-grid { display: grid; gap: 20px; }
+    .three-columns { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); display: grid; }
+    .four-columns { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); display: grid; }
+    .tile { background: rgba(255,255,255,0.03); border-radius: 12px; padding: 18px; transition: transform .2s ease, box-shadow .2s ease; }
+    .tile:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); }
+    @media (prefers-color-scheme: dark) {
+      .tile { background: rgba(255,255,255,0.02); color: #eee; }
+    }
+
+    /* small helpers */
+    .center-tiny { text-align: center; max-width: 900px; margin: 0 auto; }
+    .muted { opacity: 0.85; font-weight: 400; }
+
+    /* CTA style */
+    .cta-row { display:flex; gap:12px; justify-content:center; align-items:center; margin-top:18px; flex-wrap:wrap;}
   </style>
 </head>
 
@@ -217,6 +236,10 @@
     <nav id="mainNav" class="nav">
       <ul class="nav-list">
         <li class="desktop-howitworks"><a href="#how-vikora-works">How It Works</a></li>
+        <li><a href="#trending-skills">Skills</a></li>
+        <li><a href="#skill-labs">Labs</a></li>
+        <li><a href="#vikora-events">Events</a></li>
+        <li><a href="#join-community">Join</a></li>
       </ul>
     </nav>
 
@@ -301,7 +324,10 @@
       <div class="tile feature-card"><p>"The virtual experience gave me a real taste of being an architect."</p><h4>— Aarav Verma, Class 11</h4></div>
       <div class="tile feature-card"><p>"I finally understood which career suits me best — and how to get there."</p><h4>— Mehak Jain, Class 9</h4></div>
     </div>
-   <!-- Maintenance Notice Section -->
+  </div>
+</section>
+
+<!-- ===== Maintenance Notice Section (keeps original overlay) ===== -->
 <section class="maintenance-section" id="maintenance-section">
   <div class="maintenance-box">
     <span class="maintenance-icon">🛠️</span>
@@ -316,424 +342,209 @@
   </div>
 </section>
 
-<style>
-/* 🌈 Maintenance Section Styling - Enhanced */
-.maintenance-section {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  width: 90%;
-  max-width: 900px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: #ffffff;
-  text-align: center;
-  padding: 0;
-  box-sizing: border-box;
-  opacity: 0;
-  transition: all 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  z-index: 99999;
-  overflow: visible;
-}
+<!-- ===== ADDITIONAL ADVANCED SECTIONS (new content) ===== -->
 
-/* Semi-transparent backdrop overlay */
-.maintenance-section::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: -1;
-  animation: fadeInBackdrop 1s ease;
-}
+<!-- Skill Labs -->
+<section id="skill-labs" class="tiles-section">
+  <div class="section-container">
+    <h2>🧬 Skill Labs</h2>
+    <p class="center-tiny muted">Hands-on labs where students build, fail fast, and iterate. Designed to convert curiosity into real skills.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>AI Lab</h3><p>Train simple models, experiment with datasets and visualize predictions — learn by doing.</p></div>
+      <div class="tile"><h3>Design Lab</h3><p>Wireframe, prototype and test — with templates and micro-tasks to build a portfolio.</p></div>
+      <div class="tile"><h3>Maker Lab</h3><p>Simulated 3D & IoT projects that teach prototyping and problem solving.</p></div>
+    </div>
+  </div>
+</section>
 
-@keyframes fadeInBackdrop {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+<!-- Career Match Test -->
+<section id="career-match" class="tiles-section">
+  <div class="section-container">
+    <h2>🔍 Career Match Test</h2>
+    <p class="center-tiny muted">A short, fun assessment that suggests 3 careers based on your interests and strengths.</p>
+    <div class="cta-row">
+      <button class="how-it-works-btn" onclick="window.location.href='career-test.html'">Take the Quick Test</button>
+      <button class="how-it-works-btn" onclick="window.location.href='roadmap.html'">View Roadmaps</button>
+    </div>
+  </div>
+</section>
 
-/* Enhanced floating particles background */
-.maintenance-section::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(255, 200, 255, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 40% 20%, rgba(200, 220, 255, 0.18) 0%, transparent 40%),
-    radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.12) 0%, transparent 35%),
-    radial-gradient(circle at 10% 90%, rgba(180, 200, 255, 0.15) 0%, transparent 45%);
-  animation: particleFloat 20s ease-in-out infinite;
-  pointer-events: none;
-  opacity: 0.8;
-}
+<!-- Global Future Trends -->
+<section id="global-trends" class="tiles-section">
+  <div class="section-container">
+    <h2>🌍 Global Future Trends</h2>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Green Tech</h3><p>Jobs in renewable energy, circular design, and climate tech are scaling rapidly.</p></div>
+      <div class="tile"><h3>AI & Automation</h3><p>Roles across industries require AI literacy — not just coders, but AI-savvy problem solvers.</p></div>
+      <div class="tile"><h3>Digital Creators</h3><p>Storytelling, content strategy and creator-economy skills are high-impact and accessible.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-section.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
+<!-- Mentor Spotlight -->
+<section id="mentor-spotlight" class="tiles-section">
+  <div class="section-container">
+    <h2>💼 Mentor Spotlight</h2>
+    <p class="center-tiny muted">Monthly featured mentors — short masterclasses and AMA sessions.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Ritika Mehra</h3><p>Senior UX Designer — sessions on design thinking & portfolios.</p></div>
+      <div class="tile"><h3>Arjun Malhotra</h3><p>AI Research — basics of ML, ethics, and project ideas.</p></div>
+      <div class="tile"><h3>Simran Gupta</h3><p>Founder & Entrepreneur — product thinking for school projects.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-section.hide {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.85);
-  transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  pointer-events: none;
-  visibility: hidden;
-}
+<!-- AI-Powered Learning -->
+<section id="ai-learning" class="tiles-section">
+  <div class="section-container">
+    <h2>🤖 AI-Powered Learning</h2>
+    <p class="center-tiny muted">Adaptive learning paths, personalized recommendations, and progress nudges — powered by smart algorithms.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Smart Recommendations</h3><p>Suggested modules that match your skill gaps and interests.</p></div>
+      <div class="tile"><h3>Adaptive Milestones</h3><p>Milestones that grow with your skills and confidence.</p></div>
+      <div class="tile"><h3>Skill Forecast</h3><p>Data-backed forecasting to help you pick in-demand skills early.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-box {
-  position: relative;
-  background: linear-gradient(135deg,
-    rgba(102, 126, 234, 0.98) 0%,
-    rgba(118, 75, 162, 0.98) 25%,
-    rgba(240, 147, 251, 0.98) 50%,
-    rgba(79, 172, 254, 0.98) 75%,
-    rgba(0, 242, 254, 0.98) 100%
-  );
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite, boxFloat 6s ease-in-out infinite;
-  padding: 60px 70px;
-  border-radius: 35px;
-  box-shadow: 
-    0 25px 80px 0 rgba(0, 0, 0, 0.6),
-    0 10px 40px 0 rgba(102, 126, 234, 0.4),
-    inset 0 0 80px rgba(255, 255, 255, 0.2),
-    inset 0 -2px 20px rgba(255, 255, 255, 0.3);
-  width: 100%;
-  backdrop-filter: blur(15px) saturate(200%);
-  -webkit-backdrop-filter: blur(15px) saturate(200%);
-  border: 3px solid transparent;
-  background-clip: padding-box;
-  z-index: 1;
-  overflow: hidden;
-}
+<!-- Events & Webinars -->
+<section id="vikora-events" class="tiles-section">
+  <div class="section-container">
+    <h2>🎤 Events & Webinars</h2>
+    <p class="center-tiny muted">Live workshops and speaker sessions — register to get real-time invites.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Tech Talks</h3><p>Engineers, designers, and founders share practical career tips.</p></div>
+      <div class="tile"><h3>AI for Everyone</h3><p>Beginner-friendly, hands-on AI workshops.</p></div>
+      <div class="tile"><h3>Future Skills Summit</h3><p>Annual virtual summit connecting schools and mentors across India.</p></div>
+    </div>
+  </div>
+</section>
 
-/* Animated border glow */
-.maintenance-box::after {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  background: linear-gradient(45deg, 
-    #ff00ff, #00ffff, #ff00ff, #00ffff, #ff00ff);
-  background-size: 400% 400%;
-  border-radius: 35px;
-  z-index: -1;
-  animation: borderGlow 8s linear infinite;
-  opacity: 0.6;
-  filter: blur(8px);
-}
+<!-- Student Projects Gallery -->
+<section id="student-gallery" class="tiles-section">
+  <div class="section-container">
+    <h2>🎨 Student Projects Gallery</h2>
+    <p class="center-tiny muted">Showcase of real student work — from IoT models to design prototypes.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Smart Dustbin</h3><p>IoT model for smarter waste management — by Aarav Singh.</p></div>
+      <div class="tile"><h3>AI Poetry Generator</h3><p>NLP experiment generating short, creative poems — by Mehak Jain.</p></div>
+      <div class="tile"><h3>Eco App</h3><p>Carbon tracking mobile concept — by Ishaan Malhotra.</p></div>
+    </div>
+  </div>
+</section>
 
-/* Decorative corner accents */
-.maintenance-box::before {
-  content: '';
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  border-radius: 25px;
-  top: -15px;
-  left: -15px;
-  border-right: none;
-  border-bottom: none;
-  animation: cornerRotate 10s linear infinite;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
+<!-- Weekly Skill Challenges -->
+<section id="skill-challenges" class="tiles-section">
+  <div class="section-container">
+    <h2>🏆 Weekly Skill Challenges</h2>
+    <p class="center-tiny muted">Compete, learn, and earn badges. Leaderboards refresh every week.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>AI Quiz Battle</h3><p>Fast-paced quizzes to sharpen AI basics.</p></div>
+      <div class="tile"><h3>Design Sprint</h3><p>Solve a real-world challenge in 24 hours — design & prototype.</p></div>
+      <div class="tile"><h3>Code Rush</h3><p>Speed-based coding puzzles for logic and algorithms.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-icon {
-  font-size: 90px;
-  display: block;
-  margin-bottom: 25px;
-  animation: iconBounce 2.5s infinite ease-in-out;
-  filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.6)) drop-shadow(0 0 40px rgba(255, 200, 255, 0.5));
-  position: relative;
-}
+<!-- Vikora Launchpad -->
+<section id="vikora-launchpad" class="tiles-section">
+  <div class="section-container">
+    <h2>🚀 Vikora Launchpad</h2>
+    <p class="center-tiny muted">Latest initiatives, incubations, and early-access programs.</p>
+    <ul style="text-align:left; max-width:800px; margin:16px auto;">
+      <li>🧭 <strong>Career Navigator 2.0:</strong> Smarter AI guidance coming soon.</li>
+      <li>🎓 <strong>Vikora Campus Clubs:</strong> Student innovation hubs & mentorship circles.</li>
+      <li>🌐 <strong>Global Mentorship:</strong> Cross-country mentor matching pilot.</li>
+    </ul>
+  </div>
+</section>
 
-/* Icon glow effect */
-.maintenance-icon::after {
-  content: attr(data-icon);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  filter: blur(20px);
-  opacity: 0.5;
-  animation: iconGlow 3s ease-in-out infinite;
-}
+<!-- Social Impact & SDGs -->
+<section id="social-impact" class="tiles-section">
+  <div class="section-container">
+    <h2>🌍 Social Impact</h2>
+    <p class="center-tiny muted">Vikora supports inclusive access to future skills and partners on education initiatives aligned to SDGs.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Quality Education</h3><p>Free resources for underserved students and partners.</p></div>
+      <div class="tile"><h3>Innovation</h3><p>Project-based learning driving real-world outcomes.</p></div>
+      <div class="tile"><h3>Partnerships</h3><p>Schools, NGOs, and edtech partners collaborating for scale.</p></div>
+    </div>
+  </div>
+</section>
 
-@keyframes iconGlow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
-}
+<!-- Future-Ready Index -->
+<section id="future-index" class="tiles-section">
+  <div class="section-container">
+    <h2>📊 Vikora Future-Ready Index (Snapshot)</h2>
+    <p class="center-tiny muted">Measured by student discovery, skill growth, and mentor engagement.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>92%</h3><p>Found a new career interest</p></div>
+      <div class="tile"><h3>87%</h3><p>Improved confidence in chosen path</p></div>
+      <div class="tile"><h3>95%</h3><p>Would recommend Vikora</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-title {
-  font-size: 48px;
-  margin-bottom: 20px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-shadow: 
-    0 0 30px rgba(255, 255, 255, 0.8),
-    0 0 60px rgba(255, 200, 255, 0.6),
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    0 2px 5px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(45deg, #ffffff, #f0f0ff, #fff0ff, #ffffff);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: titleShimmer 4s ease-in-out infinite;
-  position: relative;
-}
+<!-- For Schools & Teachers -->
+<section id="for-schools" class="tiles-section">
+  <div class="section-container">
+    <h2>🏫 For Schools & Educators</h2>
+    <p class="center-tiny muted">Bring Vikora into the classroom — curriculum-aligned programs and teacher dashboards.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Custom Programs</h3><p>Designed to meet school learning outcomes and exam timelines.</p></div>
+      <div class="tile"><h3>Teacher Tools</h3><p>Dashboards to monitor class progress and assign projects.</p></div>
+      <div class="tile"><h3>Workshops</h3><p>Hands-on sessions led by industry mentors.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-text {
-  font-size: 22px;
-  opacity: 0.98;
-  line-height: 1.7;
-  margin-bottom: 15px;
-  font-weight: 500;
-  text-shadow: 
-    0 2px 10px rgba(0, 0, 0, 0.3),
-    0 0 20px rgba(255, 255, 255, 0.2);
-  animation: textFadeIn 1s ease-out 0.3s both;
-}
+<!-- Behind the Scenes -->
+<section id="behind-scenes" class="tiles-section">
+  <div class="section-container">
+    <h2>🎬 Behind the Scenes</h2>
+    <p class="center-tiny muted">A small team of students, teachers and builders crafting Vikora with love and late-night coding sessions.</p>
+    <div class="tiles-grid three-columns" style="margin-top:18px;">
+      <div class="tile"><h3>Code & Coffee</h3><p>Engineers building features and fixing bugs fast.</p></div>
+      <div class="tile"><h3>Design with Heart</h3><p>Screens and interactions crafted for young learners.</p></div>
+      <div class="tile"><h3>Student Voices</h3><p>Feedback loops with learners shaping the product roadmap.</p></div>
+    </div>
+  </div>
+</section>
 
-.maintenance-extra {
-  font-size: 19px;
-  opacity: 0.95;
-  line-height: 1.8;
-  margin-top: 15px;
-  font-style: italic;
-  font-weight: 300;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.2),
-    0 0 15px rgba(255, 255, 255, 0.15);
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  animation: textFadeIn 1s ease-out 0.5s both;
-}
+<!-- Partnerships CTA -->
+<section id="partnerships" class="tiles-section">
+  <div class="section-container center-tiny">
+    <h2>🤝 Partnerships</h2>
+    <p class="muted">Interested in partnering with Vikora? We collaborate with schools, NGOs, and tech partners.</p>
+    <div class="cta-row">
+      <button class="how-it-works-btn" onclick="window.location.href='mailto:partners@vikora.example'">Contact Partnerships</button>
+      <button class="how-it-works-btn" onclick="window.location.href='community.html'">Join the Community</button>
+    </div>
+  </div>
+</section>
 
-/* 🌈 Enhanced Gradient Animation */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+<!-- Vikora Stats (keeps original stats idea but expanded) -->
+<section id="vikora-stats" class="tiles-section">
+  <div class="section-container">
+    <h2>📈 Vikora in Numbers</h2>
+    <div class="tiles-grid four-columns" style="margin-top:18px;">
+      <div class="tile"><h3>20,000+</h3><p>Students Mentored</p></div>
+      <div class="tile"><h3>250+</h3><p>Experts & Mentors</p></div>
+      <div class="tile"><h3>500+</h3><p>Career Roadmaps</p></div>
+      <div class="tile"><h3>15+</h3><p>Partner Schools</p></div>
+    </div>
+  </div>
+</section>
 
-/* ✨ Enhanced floating particle animation */
-@keyframes particleFloat {
-  0% { 
-    transform: translate(0, 0) rotate(0deg) scale(1); 
-    opacity: 0.6;
-  }
-  33% { 
-    transform: translate(30px, -40px) rotate(120deg) scale(1.15); 
-    opacity: 0.8;
-  }
-  66% { 
-    transform: translate(-20px, -20px) rotate(240deg) scale(1.05); 
-    opacity: 0.7;
-  }
-  100% { 
-    transform: translate(0, 0) rotate(360deg) scale(1); 
-    opacity: 0.6;
-  }
-}
-
-/* 📦 Enhanced box floating animation */
-@keyframes boxFloat {
-  0%, 100% { 
-    transform: translateY(0px);
-    box-shadow: 
-      0 25px 80px 0 rgba(0, 0, 0, 0.6),
-      0 10px 40px 0 rgba(102, 126, 234, 0.4),
-      inset 0 0 80px rgba(255, 255, 255, 0.2),
-      inset 0 -2px 20px rgba(255, 255, 255, 0.3);
-  }
-  50% { 
-    transform: translateY(-20px);
-    box-shadow: 
-      0 35px 100px 0 rgba(0, 0, 0, 0.7),
-      0 15px 60px 0 rgba(102, 126, 234, 0.6),
-      inset 0 0 100px rgba(255, 255, 255, 0.25),
-      inset 0 -2px 30px rgba(255, 255, 255, 0.4);
-  }
-}
-
-/* 🔄 Corner decoration rotation */
-@keyframes cornerRotate {
-  0% { 
-    transform: rotate(0deg);
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% { 
-    transform: rotate(360deg);
-    opacity: 0.4;
-  }
-}
-
-/* 🌟 Border glow animation */
-@keyframes borderGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* 📝 Text fade in animation */
-@keyframes textFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 🎯 Icon bounce animation */
-@keyframes iconBounce {
-  0%, 100% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-12px) scale(1.08) rotate(-5deg);
-  }
-  50% {
-    transform: translateY(0) scale(1) rotate(0deg);
-  }
-  75% {
-    transform: translateY(-6px) scale(1.04) rotate(5deg);
-  }
-}
-
-/* ✨ Enhanced title shimmer effect */
-@keyframes titleShimmer {
-  0% {
-    background-position: 0% 50%;
-    text-shadow: 
-      0 0 30px rgba(255, 255, 255, 0.8),
-      0 0 60px rgba(255, 200, 255, 0.6),
-      0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    background-position: 100% 50%;
-    text-shadow: 
-      0 0 40px rgba(255, 255, 255, 1),
-      0 0 80px rgba(200, 200, 255, 0.8),
-      0 4px 20px rgba(0, 0, 0, 0.4);
-  }
-  100% {
-    background-position: 0% 50%;
-    text-shadow: 
-      0 0 30px rgba(255, 255, 255, 0.8),
-      0 0 60px rgba(255, 200, 255, 0.6),
-      0 4px 15px rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* 📱 Responsive Design */
-@media (max-width: 768px) {
-  .maintenance-section {
-    width: 95%;
-  }
-  
-  .maintenance-box {
-    padding: 40px 30px;
-    border-radius: 20px;
-  }
-  
-  .maintenance-box::before,
-  .maintenance-box::after {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .maintenance-title {
-    font-size: 32px;
-    margin-bottom: 15px;
-  }
-  
-  .maintenance-text {
-    font-size: 18px;
-  }
-  
-  .maintenance-extra {
-    font-size: 16px;
-    margin-top: 12px;
-  }
-  
-  .maintenance-icon {
-    font-size: 65px;
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .maintenance-section {
-    width: 95%;
-  }
-  
-  .maintenance-box {
-    padding: 30px 20px;
-    border-radius: 18px;
-  }
-  
-  .maintenance-title {
-    font-size: 24px;
-  }
-  
-  .maintenance-text,
-  .maintenance-extra {
-    font-size: 15px;
-  }
-  
-  .maintenance-icon {
-    font-size: 55px;
-  }
-}
-</style>
-
-<script>
-/* 🔥 Fade-In & Auto-Hide Effect - Show Once Per Session */
-document.addEventListener("DOMContentLoaded", function() {
-  const section = document.getElementById("maintenance-section");
-  
-  // Check if maintenance message has been shown in this session
-  const hasSeenMaintenance = sessionStorage.getItem('vikoraMaintenanceSeen');
-  
-  if (!hasSeenMaintenance) {
-    // First time in this session - show the maintenance overlay
-    setTimeout(() => {
-      section.classList.add("visible");
-    }, 200); // fade in smoothly
-
-    // Auto-hide after 6 seconds
-    setTimeout(() => {
-      section.classList.add("hide");
-      // Mark as seen in sessionStorage (clears when browser closes)
-      sessionStorage.setItem('vikoraMaintenanceSeen', 'true');
-    }, 6000); // auto-hide after 6 seconds
-  } else {
-    // Already seen in this session - keep it hidden
-    section.style.display = 'none';
-  }
-});
-</script>
+<!-- Join Community CTA (keeps earlier CTA) -->
+<section id="join-community" class="tiles-section">
+  <div class="section-container">
+    <h2>💬 Join the Vikora Community</h2>
+    <p class="center-tiny muted">Connect with learners, mentors and creators shaping the future.</p>
+    <div class="cta-row">
+      <button class="how-it-works-btn" onclick="window.location.href='signup.html'">Join Now</button>
+      <button class="how-it-works-btn" onclick="window.location.href='community.html'">Explore Community</button>
+    </div>
   </div>
 </section>
 
@@ -744,7 +555,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <div class="footer-about-link"><a href="#" id="openAbout">About</a></div>
       <div class="footer-our-team-link"><a href="#" id="openTeam">Our Team</a></div>
     </div>
-    <p class="footer-text"> 2025 <img src="images/logo.png" class="footer-brand-logo"> <span>𝓲𝓴𝓸𝓻𝓪</span>
+    <p class="footer-text"> 2025 <img src="images/logo.png" class="footer-brand-logo" style="width:22px;vertical-align:middle;"> <span>𝓲𝓴𝓸𝓻𝓪</span></p>
   </div>
 </footer>
 
@@ -757,7 +568,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <p>It is an online career mentor Platform where students can get a path to their Career.</p>
     
     <h3>Why is it needed?</h3>
-    <p>Assume a student wants to become a Photographer and in their surroundings everybody doesn't know about how to become a Photographer and what is the right path. student research on the internet. We all know the internet has a huge amount of data by different Persons on their experiences and research data. Student is stuck with huge amounts of data. At this time Vikora help Student by providing a roadmap to achieve their Career.</p>
+    <p>Assume a student wants to become a Photographer and in their surroundings everybody doesn't know about how to become a Photographer and what is the right path. Student researches the internet — which often leaves them with too many conflicting sources. Vikora helps by delivering curated roadmaps and hands-on simulations to cut through the noise.</p>
     
     <h3>Key features of Vikora</h3>
     <ul>
@@ -767,10 +578,10 @@ document.addEventListener("DOMContentLoaded", function() {
     </ul>
     
     <h3>What is Virtual Career Experience?</h3>
-    <p>Virtual Career Experience (VCE) It provides an experience and type of work to students before pursuing their Career.</p>
+    <p>Virtual Career Experience (VCE) provides a hands-on simulation of job tasks and real work — so students can explore the day-to-day before making career choices.</p>
     
-    <h3>What is Talk to Experts of their Career?</h3>
-    <p>Talk to Expert of their Career this feature clears the doubt of students where students can talk to Experienced experts of their Career</p>
+    <h3>What is Talk to Experts?</h3>
+    <p>Talk to Expert sessions let students book time with experienced professionals to ask questions, get direction, and receive actionable next steps.</p>
   </div>
 </div>
 
@@ -800,6 +611,31 @@ document.addEventListener("DOMContentLoaded", function() {
   function scrollToSection() {
     document.querySelector('#how-vikora-works')?.scrollIntoView({ behavior: 'smooth' });
   }
+
+  /* 🔥 Fade-In & Auto-Hide Effect - Show Once Per Session */
+  document.addEventListener("DOMContentLoaded", function() {
+    const section = document.getElementById("maintenance-section");
+    
+    // Check if maintenance message has been shown in this session
+    const hasSeenMaintenance = sessionStorage.getItem('vikoraMaintenanceSeen');
+    
+    if (!hasSeenMaintenance && section) {
+      // First time in this session - show the maintenance overlay
+      setTimeout(() => {
+        section.classList.add("visible");
+      }, 200); // fade in smoothly
+
+      // Auto-hide after 6 seconds
+      setTimeout(() => {
+        section.classList.add("hide");
+        // Mark as seen in sessionStorage (clears when browser closes)
+        sessionStorage.setItem('vikoraMaintenanceSeen', 'true');
+      }, 6000); // auto-hide after 6 seconds
+    } else if (section) {
+      // Already seen in this session - keep it hidden
+      section.style.display = 'none';
+    }
+  });
 
   // ✅ AI Button opens correct chatbot page
   document.getElementById("open-ai-chat").addEventListener("click", () => {
@@ -848,6 +684,16 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.overflow = '';
     }
   });
+
+  // Theme toggle fallback (keeps your script compatibility)
+  const themeToggleBtn = document.getElementById("themeToggle");
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', ()=>{
+      document.body.classList.toggle("dark");
+      const icon = document.getElementById('themeToggleIcon');
+      if (icon) icon.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+  }
 </script>
 
 </body>
